@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, maximum-scale=1.0,minimum-scale=1.0, user-scalable=0">
+    <link rel="stylesheet" href="css/register.min.css">
+    <link rel="stylesheet" type="text/css" href="css/LArea.css" />
+    <script src="../js/jquery-1.9.1.min.js"></script>
+    <script src="js/LArea.min.js"></script>
+    <script src="js/register.min.js"></script>
+    <title>注册评估神</title>
+</head>
+<body>
+<div id="main">
+      <div class="header">
+          <img src="img/header.svg" alt="">
+      </div>
+      <div class="register">
+            <ul>
+                <li>
+                    <p class="left">手机号</p>
+                    <div class="left control">
+                        <input  id="tel" type="number" placeholder="请输入手机号码">
+                    </div>
+                </li>
+                <li>
+                    <p class="left">密码</p>
+                    <div class="left control">
+                        <input  id="pass"  type="password" placeholder="字母+数字组合，大于等于8位">
+                    </div>
+                </li>
+                <li>
+                    <p class="left">常驻业务城市</p>
+                    <div class="right businessCity">
+                        <span class="city" id="city">请选择</span>
+                        <i></i>
+                    </div>
+                </li>
+                <li>
+                    <p class="left">验证码</p>
+                    <div class="right verify">
+                        <div>
+                            <input id="verification" type="text" placeholder="验证码" >
+                        </div>
+                        <span class="news" id="news">获取短信验证码</span>
+                    </div>
+                </li>
+            </ul>
+           <div class="agreement">
+               <input class="left" type="checkbox" id="choose">
+               <a  class="left" id="user" href="#">用户协议</a>
+           </div>
+          <div class="btn">
+              <button id="btn" type="button">确认注册</button>
+          </div>
+      </div>
+      <div class="footer">
+          <img src="img/footer.svg" alt="">
+      </div>
+</div>
+<div id="layer">
+    <div>
+        <p>您输入的验证码有误</p>
+    </div>
+</div>
+</body>
+</html>

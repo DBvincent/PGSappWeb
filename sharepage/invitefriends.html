@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0, maximum-scale=1.0,user-scalable=0">
+  <title>评估神，开单快人一步</title>
+ </head>
+ <style>
+ *{
+	padding:0 0;
+	margin:0 0;
+	font-size: 16px;
+ }
+ img{
+	width:100%;
+	display: block;
+ }
+ .warp {
+    position: relative;
+}
+ .text {
+    position: absolute;
+    top: 27%;
+    text-align: center;
+    width: 100%;
+}
+ .foot-text {
+    position: absolute;
+    bottom: 20px;
+    text-align: center;
+    width: 100%;
+}
+input[type="number"] {
+    border: 0;
+    width: 90%;
+    height: 40px;
+    border-radius: 5px;
+	padding-left:5px;
+	text-align: center;
+}
+input[type="button"] {
+    width: 90%;
+    background: #ffbb24;
+    border: 0;
+    height: 40px;
+    margin-top: 10px;
+    border-radius: 5px;
+    color: #fff;
+}
+input{
+	-webkit-appearance: none; 
+	-moz-appearance: none; 
+	-o-appearance: none; 
+	appearance: none;
+	outline:none;
+	resize:none;
+	color:#666666;
+}
+input::-webkit-input-placeholder { 
+	color:#666666; 
+	font-size: 15px;
+}
+input::-webkit-input-placeholder {
+    color:#666666;
+    font-size: 15px;
+}
+input::-webkit-input-placeholder {
+    color:#666666;
+    font-size: 15px;
+}
+ </style>
+ <body>
+  <div class="warp">
+	<div class="text">
+		<input type="number" name="telphone" placeholder="请输入手机号"/>
+		<input type="button" value="在线下载评估神" onclick="downLaod(this)"/>
+	</div>
+	<div class="img-wrap">
+		<img src="img/svg4.svg"/>
+	</div>
+	<div class="foot-text">
+		<input type="number" name="telphone" placeholder="请输入手机号"/>
+		<input type="button" value="在线下载评估神" onclick="downLaod(this)"/>
+	</div>
+  </div>
+ </body>
+ <script src="../js/zepto.js"></script>
+ <!--<script src="../../js/common/domainName.js"></script>-->
+ <script>
+	$(function(){
+		
+	});
+	function downLaod(dom){
+		var telPhone = $(dom).prev("input").val();
+		var userId =GetQueryString("userId");
+		if(userId ==null){
+		   alert("推荐人不能为空");
+		   return;
+		};
+		if(!(/^1[34578]\d{9}$/.test(telPhone))){
+			alert("请输入正确的手机号码格式");
+			return;
+        }
+
+		var postUrl ='../../guest/extension';
+		$.ajax({
+	        type: 'POST',
+	        url: postUrl,
+	        data: {userId:userId,idMobile:telPhone},
+	        dataType: 'json',
+	        success: function (json) {
+	            if (json.succeed!=true&&!json.data.CODE=='00') {
+	            	alert(json.data.MSG);
+	            }else{
+                    location.href="http://a.app.qq.com/o/simple.jsp?pkgname=com.dashuf.disp.v2";
+	            }
+	        }
+	    });
+	}
+	function GetQueryString(name){
+	     var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+	     var r = window.location.search.substr(1).match(reg);
+	     if(r!=null)return  unescape(r[2]); return null;
+	}
+</script>
+</html>

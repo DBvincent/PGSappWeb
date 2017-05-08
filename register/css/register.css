@@ -1,0 +1,214 @@
+html{
+    font-size:12px;
+}
+body,div,ul,li,p,h1,h2,h3,h4,h5,dl,dt,dd,ol{
+    margin: 0; padding: 0;
+}
+li{
+    list-style: none;
+}
+.left{
+    float:left;
+}
+.right{
+    float:right;
+}
+body{
+    font-family: "微软雅黑";
+    box-sizing: border-box;
+    color:#666666;
+    background:#f0f0f0;
+    width: 100%;
+    height:100%;
+    position: relative;
+}
+#main{
+    width: 100%;
+}
+#main .header,#main .register{
+    background:#ffffff;
+}
+#main .header{
+    padding:10% 20%;
+}
+.header img{
+    width: 100%;
+}
+#main .register{
+    width: 100%;
+}
+.register ul{
+    padding:0 5%;
+    border-top:1px solid #cccccc;
+    border-bottom:1px solid #cccccc;
+}
+.register ul li{
+    overflow: hidden;
+    border-bottom:1px solid #cccccc;
+    height:3.5rem;
+    line-height: 3.5rem;
+    font-size: 1.4rem;
+}
+.register ul li:last-child{
+    border:0;
+}
+.register ul li input{
+    height: 2.5rem;
+    line-height: 2.5rem;
+    width: 100%;
+    border: 0;
+    font-size: 1.4rem;
+}
+.register ul li span{
+    margin-left: 5%;
+    height:3.5rem;
+    line-height: 3.5rem;
+    border: 0;
+    font-size: 1.4rem;
+    padding:0 5%;
+}
+.register ul li>div{
+    width: 80%;;
+    text-align: right;
+}
+.register ul li .control{
+    text-align: left;
+}
+.register ul li .businessCity{
+    width: 55%;;
+}
+.register ul li .verify{
+    text-align: left;
+}
+.register ul li .verify>div{
+    float: left;
+    width:45%;
+}
+.register ul li .verify>div input{
+    width: 100%;
+}
+.register ul li .verify{
+    text-align: right;
+}
+.register ul li:nth-child(1) input{
+    margin-left: 5%;
+}
+.register ul li:nth-child(2) input{
+    margin-left: 10%;
+}
+.register ul li #verification{
+    width:100%;
+    margin:0;
+    padding:0;
+}
+.register ul li .news{
+    font-size: 1rem;
+    border:1px solid #cccccc;
+    height:1rem;
+    line-height: 1rem;
+    padding: 0.5rem 0.5rem;
+    margin-top:0.6rem;
+}
+.register ul li .news:target{
+	background:#DDDDDD;
+	color:#FFFFFF;
+}
+.register ul li i{
+    display: inline-block;
+    width:1.2rem;
+    height:1.2rem;
+    background:url("../img/arrow.svg") no-repeat;
+}
+#main .agreement,#main .btn{
+    background:#f0f0f0;
+    padding:2%;
+}
+#main .agreement{
+    padding:5%;
+    overflow:hidden;
+}
+#main .agreement input{
+    height:1.4rem;
+}
+#main .agreement a{
+    color:#cccccc;
+    font-size:1.4rem;
+}
+.btn button{
+    width: 100%;
+    background:#fec43f;
+    border: 0;
+    color: #ffffff;
+    font-size: 1.4rem;
+    padding:2% 0;
+    border-radius: 5px;
+}
+.footer{
+    padding-bottom: 10%;
+}
+.footer img{
+    width:90%;
+    padding:0 5%;
+}
+#layer{
+    display: none;
+    position: fixed;
+    top:40%;
+    left:25%;
+    width: 50%;
+    height: 10%;
+    background:rgba(0,0,0,0.5);
+    border-radius: 5px;
+    z-index: 1;
+    font-size:1.4rem;
+    color:#ffffff;
+}
+#layer div{
+    display: table;
+    width: 100%;
+    height:100%;
+}
+#layer p{
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+    padding:0 5%;
+    font-size:1.4rem;
+    color:#ffffff;
+}
+.area_roll_mask{
+    background:#ffffff;
+}
+.error::-webkit-input-placeholder { /* WebKit browsers */
+    color: #ef6762;
+    font-size: 1.4rem;
+}
+.error:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+    color: #ef6762;
+    font-size: 1.4rem;
+}
+.error::-moz-placeholder { /* Mozilla Firefox 19+ */
+    color: #ef6762;
+    font-size: 1.4rem;
+}
+.error:-ms-input-placeholder { /* Internet Explorer 10+ */
+    color: #ef6762;
+    font-size: 1.4rem;
+}
+
+::-webkit-input-placeholder { /* WebKit browsers */
+    color: #B2B2B2;
+    font-size: 1.4rem;
+}
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+    color: #B2B2B2;
+    font-size: 1.4rem;
+}
+::-moz-placeholder { /* Mozilla Firefox 19+ */
+    color: #B2B2B2;
+    font-size: 1.4rem;
+}
+:-ms-input-placeholder { /* Internet Explorer 10+ */
+    color: #B2B2B2;
+    font-size: 1.4rem;
+}

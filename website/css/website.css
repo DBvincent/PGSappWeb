@@ -1,0 +1,81 @@
+﻿html{
+    font-size:12px;
+}
+body,div,ul,li,p,h1,h2,h3,h4,h5,dl,dt,dd,ol{
+    margin: 0; padding: 0;
+}
+li{
+    list-style: none;
+}
+.left{
+    float:left;
+}
+.right{
+    float:right;
+}
+body{
+    font-family: "微软雅黑";
+    box-sizing: border-box;
+    color:#666666;
+    background:#ffffff;
+    width: 100%;
+    height:100%;
+}
+#main{
+    width: 100%;
+    height:100%;
+    position: relative;
+}
+#company{
+    margin-top:1.5rem;
+    padding:0 0.8rem;
+}
+#company .comName{
+    overflow: hidden;
+    height:2.5rem;
+    line-height: 2.5rem;
+}
+#company .comName h3{
+    font-size:1.5rem;
+}
+#main .rightShare{
+    text-align: center;
+    color:#ffffff;
+    background: #fec43f;
+    width: 8.5rem;
+    height: 2.25rem;
+    line-height:2.25rem;
+    font-size:1.35rem;
+    border-radius: 15px;
+    position: absolute;
+    right: 1rem;
+}
+#company .information{
+    margin-top:1rem;
+}
+#company .information ul li{
+    margin:0.5rem 0;
+}
+#company .information ul li div{
+    overflow: hidden;
+    font-size:1.1rem;
+}
+#company .information ul li a{
+    color:#fec43f;
+}
+#map{
+    margin:2rem 0 3rem 0;
+    height:35rem;
+}
+#map0{
+    margin:2rem 0 3rem 0;
+    height:35rem;
+}
+#map1{
+    margin:2rem 0 3rem 0;
+    height:35rem;
+}
+#map2{
+    margin:2rem 0 3rem 0;
+    height:35rem;
+}

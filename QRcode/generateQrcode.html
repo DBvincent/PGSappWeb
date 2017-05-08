@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="keywords" content=""/>
+		<meta name="author" content=""/>
+		<meta name="viewport" content="width=device-width,initial-scale=1.0, maximum-scale=1.0,minimum-scale=1.0, user-scalable=0">
+		<script src="../js/jquery-1.9.1.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/jquery.qrcode.min.js" type="text/javascript" charset="utf-8"></script>
+		<title>二维码</title>
+		<style type="text/css">
+			html {
+				height: 100%;
+				font-size: 12px;
+			}
+			
+			body,
+			div,
+			ul,
+			li,
+			p,
+			h1,
+			h2,
+			h3,
+			h4,
+			h5,
+			dl,
+			dt,
+			dd,
+			ol {
+				margin: 0;
+				padding: 0;
+			}
+			
+			li {
+				list-style: none;
+			}
+			
+			.left {
+				float: left;
+			}
+			
+			.right {
+				float: right;
+			}
+			
+			body {
+				font-family: "微软雅黑";
+				box-sizing: border-box;
+				color: #666666;
+				background: #f0f0f0;
+				width: 100%;
+				height: 100%;
+				background: #000000;
+			}
+			#main{
+				width: 100%;
+				height: 100%;
+				position: relative;
+			}
+			#can{
+				width: 350px;
+				height: 475px;
+				position: absolute;
+				top:10%;
+			}
+			#canvas{
+				background:#FFFFFF;
+				/*border-radius: 20px;*/
+			}
+			#IMG{
+				width: 70%;
+				height: 475px;
+				position: absolute;
+				top:10%;
+				left:10%;
+				/*left:calc((100%-375px)/2);*/
+			}
+			#IMG img{
+				width: 300px;
+				border-radius: 20px;
+				background: #FFFFFF;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="main">
+			<div id="code" hidden="hidden"></div>
+			<div id="Image" hidden="hidden">
+				<img src="" alt="" />
+			</div>
+			<div id="can" hidden="hidden">
+				<img src="images/recode3.png" alt="" hidden="hidden"/>
+				<canvas id="canvas" width="600px" height="905px" style="width: 300px;height: 475px;"></canvas>
+			</div>
+			<div id="IMG" >
+				<img src="" alt="" />
+			</div>
+		</div>
+	</body>
+	<script>
+	var obj={};
+	var invitationCode;
+	var HREF="https://disp-api.banketech.com/static/register/register.html?requestId="
+	$(function(){
+		find();
+		HREF+=obj.InviteCode;
+		console.log(HREF);
+		$('#code').qrcode(HREF); //任意字符串 
+		var src=$("#code canvas")[0].toDataURL("image/png");
+		$("#Image img").attr("src",src);
+		var img1=new Image();
+		var img2=new Image();
+		img1.src=$("#can img").attr("src");
+		img2.src=$("#Image img").attr("src");
+		var canvas = document.getElementById("canvas");
+    	var context = canvas.getContext("2d");
+    	context.font="30px Helvetica";
+    	img1.onload=function(){
+    		context.drawImage(img1,0,0,600,905);
+    	}
+    	img2.onload=function(){
+    		context.drawImage(img2,122,260,360,360);
+    		context.fillText(obj.name,160,699);
+    		context.fillText(obj.tel,300,698);
+      		var srcImg=$("#canvas")[0].toDataURL("image/png");
+      		$("#IMG img").attr("src",srcImg);
+    	}
+	});
+    //获取web storage 数据
+   	function find(){
+        var storage = window.localStorage;
+        for (var i=0, len = storage.length; i  <  len; i++){
+            var key = storage.key(i);
+            var value = storage.getItem(key);
+            obj[key]=value;
+            console.log(key + "=" + value);
+        }
+        console.log(obj);
+    }
+  
+	</script>
+</html>

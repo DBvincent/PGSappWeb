@@ -1,0 +1,339 @@
+html {
+    font-size: 12px;
+    background: #F0F0F0;
+}
+html, body {
+    margin: 0; 
+    padding: 0;
+}
+.block {
+	font-size: 1.4rem;
+	background: #FFFFFF;
+	margin: 0.5rem 0;
+}
+#content ul {
+	padding: 0 0.8rem;
+    border-bottom: 1px solid #CECECE;
+    border-top: 1px solid #CECECE;
+}
+#content li {
+    width: 100%;
+	list-style: none;
+	height: 3.5rem;
+	line-height: 3.5rem;
+	overflow: hidden;
+	margin-left: 0.8rem;
+	position: relative;
+}
+.line {
+	border-bottom: 1px solid #D9D9D9;
+}
+#content span {
+	font-size: 1.4rem;
+	color: #666666;
+}
+#select-area #counterCompany{
+	width: 12rem;
+	height: 3.5rem;
+	line-height: 3.5rem;
+	padding: 0 !important;
+	text-align: right;
+	border: 0;
+	font-size: 1.4rem;
+	color: #b2b2b2;
+    font-weight: normal;
+}
+#select-area .arrow {
+    position: relative;
+    top:0.1rem;
+    left:0.5rem;
+    display:inline-block;
+    width:1.2rem;
+    height:1.2rem;
+    background:url("../img/arrow.svg") no-repeat;
+}
+#content input {
+	width: 12rem;
+	height: 2.5rem;
+	line-height: 2.5rem;
+	text-align: right;
+	border: 0;
+	font-size: 1.4rem;
+	color: #666666;
+}
+#content i {
+	font-style: normal;
+	line-height: 3.5rem;
+	font-size: 1.4rem;
+	color: #666666;
+}
+#content p {
+	font-weight: bold;
+	color: #666666;
+    height: 2.5rem;
+    line-height: 2.5rem;
+    padding: 0 1.3rem;
+}
+#content li img {
+    position: relative;
+    left: 0;
+    top: 20%;
+    width: 4rem;
+    height: 2rem;
+}
+.li-left {
+	float: left;
+}
+.li-right {
+	float: right;
+    padding-right: 0.8rem;
+}
+.uploadImg {
+    margin: 0.5rem 0.8rem 0;
+    position: relative;
+    height: 5.5rem;
+    border-radius: 5px;
+    background-size: 100% 100%;
+    /*box-shadow: 0px 8px 15px rgba(0,0,0,0.1);*/
+}
+.uploadImg img {
+    width: 100%;
+    height: 5.5rem;
+}
+#deleteImg {
+	display: none; 
+    position: absolute;
+    top: -0.4rem;
+    right: -0.1rem;
+    width: 1.5em;
+    height: 1.5rem;
+}
+#deleteImg button {
+    width: 1.4em;
+    height: 1.5rem;
+    border: 0;
+    color: #ffffff;
+    background: #fec43f;
+    border-radius: 50%;
+    padding: 0;
+    text-align: center;
+}
+.addIcon {
+    overflow: hidden;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    background: url(../img/plus.svg) no-repeat;
+    position: absolute;
+    top: 25%;
+    left: 50%;
+    -webkit-transform: translateX(-50%);
+    transform: translateX(-50%);
+}
+.btn-sumbit {
+	box-sizing: border-box;
+	width: 100%;
+	margin: 5% 0;
+	padding: 3% 2%;
+	text-align: center;
+	border: 0;
+	color: #FFFFFF;
+	font-size: 1.4rem;
+}
+.btn-sumbit button {
+    border: 0;
+    color: #ffffff;
+    width: 96%;
+    background: #fec43f;
+    font-size: 1.4rem;
+    padding: 0.5rem 0;
+    border-radius: 0.5rem;
+}
+#counterCompany select {
+    background-color: #FFFFFF;
+    direction: rtl;
+	font-size: 1.4rem;
+	color: #B2B2B4;
+}
+
+.tip {
+	position: absolute;
+	color: red;
+	right: 50%;
+	top: 0;
+}
+
+.error::-webkit-input-placeholder { /* WebKit browsers */
+    color: #ef6762;
+    font-size: 1.4rem;
+}
+.error:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+    color: #ef6762;
+    font-size: 1.4rem;
+}
+.error::-moz-placeholder { /* Mozilla Firefox 19+ */
+    color: #ef6762;
+    font-size: 1.4rem;
+}
+.error:-ms-input-placeholder { /* Internet Explorer 10+ */
+    color: #ef6762;
+    font-size: 1.4rem;
+}
+
+::-webkit-input-placeholder { /* WebKit browsers */
+    color: #B2B2B2;
+    font-size: 1.4rem;
+}
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+    color: #B2B2B2;
+    font-size: 1.4rem;
+}
+::-moz-placeholder { /* Mozilla Firefox 19+ */
+    color: #B2B2B2;
+    font-size: 1.4rem;
+}
+:-ms-input-placeholder { /* Internet Explorer 10+ */
+    color: #B2B2B2;
+    font-size: 1.4rem;
+}
+select {
+  /*Chrome和Firefox里面的边框是不一样的，所以复写了一下*/
+  border: none;
+  /*很关键：将默认的select选择框样式清除*/
+  appearance:none;
+  -moz-appearance:none;
+  -webkit-appearance:none;
+  /*为下拉小箭头留出一点位置，避免被文字覆盖*/
+  /*padding-right: 14px;*/
+}
+/*清除ie的默认选择框样式清除，隐藏下拉箭头*/
+select::-ms-expand { display: none; }
+
+* {
+	margin: 0;
+	padding: 0;
+}
+/*下次勾选样式*/
+#box-content{
+    position: relative;
+    box-shadow: 0px -4px 15px rgba(0,0,0,0.2);
+}
+.top {
+	padding: 1.2rem 0 1rem 0;
+	background: #FFFFFF;
+}
+.top p {
+    text-align: center;
+    font-size: 1.4rem;
+    color: #ffbb24;
+    font-family: serif;
+}
+.close {
+    position: absolute;
+    width:1.2rem;
+    height:1.2rem;
+    display: inline-block;
+    text-align: center;
+    top:0.5rem;
+    right: 0.5rem;;
+    border:0;
+    background:#ffbb24;
+    color:#ffffff;
+    padding:0;
+    border-radius: 50%;
+}
+#box-content ul{
+    background:#ffffff;
+    padding:0 0.8rem;
+}
+#box-content ul li {
+    padding:0.5% 0.8rem;
+    height: 3.6rem;
+    overflow: hidden;
+    display: table;
+    width: 100%;
+}
+#box-content ul li:nth-child(1){
+    border-bottom: 1px solid #dddddd;
+}
+#box-content ul li:nth-child(2){
+    border-bottom: 1px solid #dddddd;
+}
+#box-content ul li .left-content span{
+    font-size: 1rem;
+    color:#b2b2b2;
+}
+#box-content ul li .left-content p{
+    font-size: 1.4rem;
+    color:#666666;
+}
+#box-content ul li .left-content i{
+    position: relative;
+    bottom: 0.2rem;
+    left:0.2rem;
+    display: inline-block;
+    font-style: normal;
+    border:1px solid #3abb00;
+    color: #3abb00;
+    font-size: 0.8rem;
+    border-radius: 1px;
+}
+#box-content ul li>.right-content img{
+    display:inline-block;
+    width: 1.5rem;
+}
+#box-content .BTN{
+    box-sizing: border-box;
+    width:100%;
+    padding: 3% 0.8rem;
+    margin-bottom: 2%;
+    text-align: center;
+    background: #ffffff;
+}
+#box-content .BTN  #sumbit {
+    border:0;
+    color:#ffffff;
+    background:#fec43f;
+    font-size:1.4rem;
+    padding:0.5rem 0;
+    border-radius: 0.5rem;
+}
+.left-content {
+	display: table-cell;
+	vertical-align: middle;
+	width: 85%;
+}
+.right-content{
+    display: table-cell;
+	vertical-align: middle;
+	width: 15%;
+    text-align: center;
+}
+#content-submit {
+	display: none;
+	position: fixed;
+	bottom: 0;
+    z-index: 10;
+}
+#box-submit {
+	width: 100%;
+	position: relative;
+}
+#box {
+	/*position: absolute;*/
+	width: 100%;
+	bottom: 0;
+}
+#top-close {
+	position: relative;
+}
+#layer{
+    display: none;
+    position: fixed;
+    height:100%;
+    width: 100%;
+    top:0;
+    left:0;
+    background:rgba(0,0,0,0.2);
+    z-index: 1;
+}

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+	<meta name="" content="" />
+	<meta name="keyword" content="" />
+	<meta name="viewport" content="width=device-width,initial-scale=1.0, maximum-scale=1.0,minimum-scale=1.0, user-scalable=0">
+	<link rel="stylesheet" type="text/css" href="css/qrcode.min.css" />
+	<script src="../js/jquery-1.9.1.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../js/verification.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/QRcodejs.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/qRcode.min.js" type="text/javascript" charset="utf-8"></script>
+    <title>评估神二维码生成</title>
+</head>
+<body>
+	<div id="main">
+		<ul>
+			<li>
+				<p>请输入姓名:</p>
+		 		<input type="text" data-validation="verifyName" class="name" placeholder="必填"/>
+			</li>
+			<li>
+				<p>请输入手机号:</p>
+				<input type="tel" data-validation="verifyTelphone" class="tel"  placeholder="必填"/>
+			</li>
+			<li id="sure">
+				<button type="button">点击确认获取邀请码</button>
+			</li>
+		</ul>
+	</div>
+</body>
+</html>

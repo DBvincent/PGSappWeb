@@ -1,0 +1,510 @@
+html{
+    font-size:12px;
+}
+body,div,ul,li,p,h1,h2,h3,h4,h5,dl,dt,dd,ol{
+    margin: 0; padding: 0;
+}
+li{
+    list-style: none;
+}
+.left{
+    float:left;
+}
+.right{
+    float:right;
+}
+body{
+    font-family: "微软雅黑";
+    box-sizing: border-box;
+    color:#666666;
+    background:#f0f0f0;
+    width: 100%;
+    height:100%;
+    position: relative;
+}
+#information,#supplement{
+    margin-top:1rem;
+    background:#ffffff;
+}
+#housing{
+    margin-top:1rem;
+}
+#other{
+    background:#ffffff;
+}
+/*客户信息样式*/
+#information{
+    border-top: 1px solid #f0f0f0;
+    border-bottom: 1px solid #f0f0f0;
+}
+#information ul{
+    padding:0 0.8rem;
+    border-bottom: 1px solid #CECECE;
+    border-top: 1px solid #CECECE;
+}
+#information ul li{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    height:3.5rem;
+    line-height: 3.5rem;
+    font-size:1.4rem;
+    border-bottom: 1px solid #f0f0f0;
+    position: relative;
+}
+#information ul li:last-child{
+    border-bottom:none;
+}
+#information ul li div input{
+    width:12rem;
+    height: 2.5rem;
+    line-height: 2.5rem;
+    text-align: right;
+    border:0;
+    font-size:1.4rem;
+    color:#666666;
+}
+#information ul li div  i{
+    font-style: normal;
+    line-height: 3.5rem;
+    font-size:1.4rem;
+}
+/*客户其他信息样式*/
+#housing>div:nth-child(1){
+    height: 3.5rem;
+    line-height: 3.5rem;
+    padding: 0 0.8rem;
+}
+#housing>div:nth-child(1) span{
+    font-weight: bold;
+    color: #666666;
+}
+#other>ul{
+	border-bottom: 1px solid #CECECE;
+	border-top: 1px solid #CECECE;
+}
+#other ul li{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    height: 3.5rem;
+    line-height: 3.5rem;
+    margin: 0 0.8rem;
+    border-bottom: 1px solid #f0f0f0;
+    font-size:1.4rem;
+}
+#other ul li:last-child{
+	border-bottom: none;
+}
+#other ul li:nth-child(1) div{
+    text-align: right;
+}
+#other ul li>div span{
+    color:#b2b2b2;
+}
+#other ul li>div input{
+    width: 80%;
+    text-align: right;
+}
+#other ul li input{
+    width:100%;
+    height:2.5rem;
+    line-height: 2.5rem;
+    text-align: left;
+    font-size:1.4rem;
+    color:#666666;
+    border:none;
+}
+#other ul li div b{
+    font-weight: normal;
+}
+#other ul li div i{
+    display:inline-block;
+    color:#b2b2b2;
+    width:1.2rem;
+    height:1.2rem;
+    background:url("../img/arrow.svg") no-repeat;
+}
+#other ul li img{
+    height:2rem;
+}
+#other ul .installment{
+    display: none;
+}
+/*房产资料*/
+#datum{
+    margin-top:1rem;
+}
+#datum>div:nth-child(1){
+    height: 2.5rem;
+    line-height: 2.5rem;
+    padding: 0 1.3rem;
+}
+#datum div:nth-child(1) span{
+    font-weight: bold;
+    color: #666666;
+}
+#datum .datumImg{
+    margin: 0.5rem 0.8rem 0;
+    position: relative;
+    height:5.5rem;
+    /*border:1px solid #dddddd;*/
+    border-radius: 5px;
+    /*background:url("../../img/id.svg") no-repeat;*/
+    background-size: 100% 100%;
+    box-shadow: 0px 8px 15px rgba(0,0,0,0.1);
+}
+#datum .datumImg .IMG img{
+    /*display: none;*/
+    width: 100%;
+    height: 5.5rem;
+}
+#datum .addIcon{
+    overflow: hidden;
+    width: 3rem;
+    height:3rem;
+    border-radius: 50%;
+    background:url("../img/plus.svg") no-repeat;
+    position: absolute;
+    top:25%;
+    left:45%;
+}
+#closeImg{
+    display: none;
+    position:absolute;
+    top:-0.4rem;
+    right:-0.1rem;
+}
+#closeImg button{
+    display: inline-block;
+    text-align: center;
+    width: 1.5em;
+    height: 1.5rem;
+    border:0;
+    background:#ffbb24;
+    color:#ffffff;
+    padding:0;
+    border-radius: 50%;
+}
+/*名下是否有车样式*/
+#installment div{
+    overflow: hidden;
+    border-bottom: 1px solid #f0f0f0;
+    font-size:1.4rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+#installment div img{
+    width: 4rem;
+    height:2rem;
+}
+/*名下是否有房贷样式*/
+#property{
+    margin:0;
+}
+#property div{
+    overflow: hidden;
+    border-bottom: 1px solid #f0f0f0;
+    font-size:1.4rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+#property div img{
+    width: 4rem;
+    height:2rem;
+}
+/*提交样式*/
+#sure{
+    box-sizing: border-box;
+    width:100%;
+    margin:5% 0;
+    padding:3% 2%;
+    text-align: center;
+}
+#sure button{
+    border:0;
+    color:#ffffff;
+    width:96%;
+    background:#fec43f;
+    font-size:1.4rem;
+    padding:0.5rem 0;
+    border-radius: 0.5rem;
+}
+/*下次勾选样式*/
+#box-content{
+    position: relative;
+    box-shadow: 0px -4px 15px rgba(0,0,0,0.2);
+}
+.top {
+    padding: 1.2rem 0 1rem 0;
+    background: #FFFFFF;
+}
+.top p {
+    text-align: center;
+    font-size: 1.4rem;
+    color: #ffbb24;
+    font-family: serif;
+}
+.close {
+    position: absolute;
+    width:1.2rem;
+    height:1.2rem;
+    display: inline-block;
+    text-align: center;
+    top:0.5rem;
+    right: 0.5rem;;
+    border:0;
+    background:#ffbb24;
+    color:#ffffff;
+    padding:0;
+    border-radius: 50%;
+}
+#box-content ul{
+    background:#ffffff;
+    padding:0 0.8rem;
+}
+#box-content ul li {
+    padding:0.5% 0.8rem;
+    height: 3.6rem;
+    overflow: hidden;
+    display: table;
+    width: 100%;
+}
+#box-content ul li:nth-child(1){
+    border-bottom: 1px solid #dddddd;
+}
+#box-content ul li:nth-child(2){
+    border-bottom: 1px solid #dddddd;
+}
+#box-content ul li .left-content span{
+    font-size: 1rem;
+    color:#b2b2b2;
+}
+#box-content ul li .left-content p{
+    font-size: 1.4rem;
+    color:#666666;
+}
+#box-content ul li .left-content i{
+    position: relative;
+    bottom: 0.2rem;
+    left:0.2rem;
+    display: inline-block;
+    font-style: normal;
+    border:1px solid #3abb00;
+    color: #3abb00;
+    font-size: 0.8rem;
+    border-radius: 1px;
+}
+#box-content ul li>.right-content img{
+    display:inline-block;
+    width: 1.5rem;
+}
+#box-content .BTN{
+    box-sizing: border-box;
+    width:100%;
+    padding: 3% 0.8rem;
+    margin-bottom: 2%;
+    text-align: center;
+    background: #ffffff;
+}
+#box-content .BTN  #sumbit {
+    border:0;
+    color:#ffffff;
+    background:#fec43f;
+    font-size:1.4rem;
+    padding:0.5rem 0;
+    border-radius: 0.5rem;
+}
+.left-content {
+    display: table-cell;
+    vertical-align: middle;
+    width: 85%;
+}
+.right-content{
+    display: table-cell;
+    vertical-align: middle;
+    width: 15%;
+    text-align: center;
+}
+#content-submit {
+    display: none;
+    position: fixed;
+    bottom: 0;
+    z-index: 10;
+}
+#box-submit {
+    width: 100%;
+    position: relative;
+}
+#box {
+    /*position: absolute;*/
+    width: 100%;
+    bottom: 0;
+}
+#top-close {
+    position: relative;
+}
+.error::-webkit-input-placeholder { /* WebKit browsers */
+    color: #ef6762;
+    font-size: 1.4rem;
+}
+.error:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+    color: #ef6762;
+    font-size: 1.4rem;
+}
+.error::-moz-placeholder { /* Mozilla Firefox 19+ */
+    color: #ef6762;
+    font-size: 1.4rem;
+}
+.error:-ms-input-placeholder { /* Internet Explorer 10+ */
+    color: #ef6762;
+    font-size: 1.4rem;
+}
+
+::-webkit-input-placeholder { /* WebKit browsers */
+    color: #B2B2B2;
+    font-size: 1.4rem;
+}
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+    color: #B2B2B2;
+    font-size: 1.4rem;
+}
+::-moz-placeholder { /* Mozilla Firefox 19+ */
+    color: #B2B2B2;
+    font-size: 1.4rem;
+}
+:-ms-input-placeholder { /* Internet Explorer 10+ */
+    color: #B2B2B2;
+    font-size: 1.4rem;
+}
+/*下次勾选样式*/
+#box-content{
+    position: relative;
+    box-shadow: 0px -4px 15px rgba(0,0,0,0.2);
+}
+.top {
+    padding: 1.2rem 0 1rem 0;
+    background: #FFFFFF;
+}
+.top p {
+    text-align: center;
+    font-size: 1.4rem;
+    color: #ffbb24;
+    font-family: serif;
+}
+.close {
+    position: absolute;
+    width:1.2rem;
+    height:1.2rem;
+    display: inline-block;
+    text-align: center;
+    top:0.5rem;
+    right: 0.5rem;;
+    border:0;
+    background:#ffbb24;
+    color:#ffffff;
+    padding:0;
+    border-radius: 50%;
+}
+#box-content ul{
+    background:#ffffff;
+    padding:0 0.8rem;
+}
+#box-content ul li {
+    padding:0.5% 0.8rem;
+    height: 3.6rem;
+    overflow: hidden;
+    display: table;
+    width: 100%;
+}
+#box-content ul li:nth-child(1){
+    border-bottom: 1px solid #dddddd;
+}
+#box-content ul li:nth-child(2){
+    border-bottom: 1px solid #dddddd;
+}
+#box-content ul li .left-content span{
+    font-size: 1rem;
+    color:#b2b2b2;
+}
+#box-content ul li .left-content p{
+    font-size: 1.4rem;
+    color:#666666;
+}
+#box-content ul li .left-content i{
+    position: relative;
+    bottom: 0.2rem;
+    left:0.2rem;
+    display: inline-block;
+    font-style: normal;
+    border:1px solid #3abb00;
+    color: #3abb00;
+    font-size: 0.8rem;
+    border-radius: 1px;
+}
+#box-content ul li>.right-content img{
+    display:inline-block;
+    width: 1.5rem;
+}
+#box-content .BTN{
+    box-sizing: border-box;
+    width:100%;
+    padding: 3% 0.8rem;
+    margin-bottom: 2%;
+    text-align: center;
+    background: #ffffff;
+}
+#box-content .BTN  #sumbit {
+    border:0;
+    color:#ffffff;
+    background:#fec43f;
+    font-size:1.4rem;
+    padding:0.5rem 0;
+    border-radius: 0.5rem;
+}
+.left-content {
+    display: table-cell;
+    vertical-align: middle;
+    width: 85%;
+}
+.right-content{
+    display: table-cell;
+    vertical-align: middle;
+    width: 15%;
+    text-align: center;
+}
+#content-submit {
+    display: none;
+    position: fixed;
+    bottom: 0;
+    z-index: 10;
+}
+#box-submit {
+    width: 100%;
+    position: relative;
+}
+#box {
+    /*position: absolute;*/
+    width: 100%;
+    bottom: 0;
+}
+#top-close {
+    position: relative;
+}
+#layer{
+    display: none;
+    position: fixed;
+    height:100%;
+    width: 100%;
+    top:0;
+    left:0;
+    background:rgba(0,0,0,0.5);
+    z-index: 1;
+}

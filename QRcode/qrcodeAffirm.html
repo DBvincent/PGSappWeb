@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="" content=""/>
+    	<meta name="keyword" content=""/>
+		<meta name="viewport" content="width=device-width,initial-scale=1.0, maximum-scale=1.0,minimum-scale=1.0, user-scalable=0">
+		<link rel="stylesheet" href="css/qrcode.css" />
+		<script src="../js/jquery-1.9.1.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/verification.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/QRcodejs.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/QRcodeData.js"></script>
+		<script src="js/qrcodeAffirm.js"></script>
+		<title>二维码信息确认</title>
+	</head>
+	<body>
+		<div id=main>
+			<ul>
+				<li>
+					<span>您的邀请码为：</span>
+					<input type="text" id="InviteCode" readonly="readonly"/>
+				</li>
+				<li>
+					<p>输入的名字：</p>
+					<input type="text" id="name" readonly="readonly"/>
+				</li>
+				<li>
+					<p>输入的手机号：</p>
+					<input type="tel" id="tel" readonly="readonly"/>
+				</li>
+				<li id="sure">
+					<button type="button">确认生成二维码</button>
+				</li>
+				<li>
+					<button type="button">返回</button>
+				</li>
+			</ul>
+		</div>
+	</body>
+</html>

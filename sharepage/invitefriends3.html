@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0, maximum-scale=1.0,user-scalable=0">
+  <title>评估神，开单快人一步</title>
+ </head>
+ <style>
+ *{
+	padding:0 0;
+	margin:0 0;
+	font-size: 16px;
+	color:#9e9e9e;
+ }
+ img{
+	width:100%;
+	display:block;
+ }
+ .warp {
+    position: relative;
+}
+ .text {
+    position: absolute;
+    top: 350px;
+    text-align: center;
+    width: 100%;
+}
+ .foot-text {
+    position: absolute;
+    bottom: 20px;
+    text-align: center;
+    width: 100%;
+}
+input[type="text"] {
+    border: 0;
+    width: 90%;
+    height: 40px;
+    border-radius: 5px;
+	padding-left:5px;
+	text-align: center;
+}
+input[type="button"] {
+    width: 90%;
+    background: #ffbb24;
+    border: 0;
+    height: 40px;
+    margin-top: 10px;
+    border-radius: 5px;
+    color: #fff;
+}
+.text-wrap{
+	text-align: center;
+    margin-bottom: 10px;
+}
+.show-text {
+    color: #ffbb24;
+    bottom: 320px;
+    font-size: 14px;
+    width: 140px;
+    font-size: 16px;
+    height: 30px;
+    border: 1px solid #ffbb24;
+    font-size: 16px;
+    line-height: 30px;
+    border-radius: 25px;
+    text-align: center;
+    margin: 0 auto;
+}
+input{
+	-webkit-appearance: none; 
+	-moz-appearance: none; 
+	-o-appearance: none; 
+	appearance: none;
+}
+.show-button {
+    text-align: center;
+    position: absolute;
+    width: 100%;
+    bottom: 10px;
+}
+.show-button-text{
+    text-align: center;
+    position: absolute;
+    width: 100%;
+    bottom: 10px;
+}
+.show-button-left {
+    display: inline-block;
+    width: 30%;
+}
+.show-button-right {
+    display: inline-block;
+    width: 30%;
+}
+ </style>
+ <body>
+  <div class="warp">
+	<div class="img-wrap">
+		<img src="img/svg3.svg"/>
+	</div>
+	<div class="show-text">预览分享页面</div>
+	<div class="text-wrap">
+		<input type="button" value="立即分享" id="shareBtn"/>
+	</div>
+  </div>
+ </body>
+ <script src="../js/zepto.js"></script>
+<script>
+var Bridge;
+if(/(Android)/i.test(navigator.userAgent)){
+    console.log(1);
+    document.addEventListener('WebViewJavascriptBridgeReady', onBridgeReady, false);
+    function onBridgeReady(event) {
+        Bridge = event.bridge;
+        Bridge.init(function (message, responseCallback) {
+            console.log('JS got a message', message);
+        });
+    }
+}else if(/(iPhone|iPad|iPod|iOS)/i.test(navigator.userAgent)){
+    function setupWebViewJavascriptBridge(callback) {
+        if (window.WebViewJavascriptBridge) { return callback(WebViewJavascriptBridge); }
+        if (window.WVJBCallbacks) { return window.WVJBCallbacks.push(callback); }
+        window.WVJBCallbacks = [callback];
+        var WVJBIframe = document.createElement('iframe');
+        WVJBIframe.style.display = 'none';
+        WVJBIframe.src = 'https://__bridge_loaded__';
+        document.documentElement.appendChild(WVJBIframe);
+        setTimeout(function() { document.documentElement.removeChild(WVJBIframe) }, 0)
+    }
+    setupWebViewJavascriptBridge(function(bridge) {
+        Bridge =bridge;
+    });
+}else{
+    console.log(3);
+    console.log("PC");
+}
+	$(function(){
+		var json = {};
+		json.webUrl = window.location.href.replace("invitefriends3","invitefriends");    
+		json.title = "推荐你使用评估神，开单快人一步";
+		json.description = "信贷经纪人的推单神器，移动做单、流程掌控、在线初审，坐享高额佣金。我已经用很久了。";
+		json.imgUrl = window.location.href.replace("invitefriends3.html","img/shareicon.png");
+		$(".text-wrap").click(function(){
+			console.log("分享好友");
+			Bridge.callHandler("share",json);
+		});
+		$(".show-text").click(function(){
+			console.log("分享好友");
+			window.location.href = "invitefriends2.html";
+		});
+	})
+</script>
+</html>

@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="" content=""/>
+    <meta name="keyword" content=""/>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, maximum-scale=1.0,user-scalable=0">
+    <link rel="stylesheet" href="css/website.css">
+    <script src="../js/zepto.js"></script>
+    <script type="text/javascript" src="../js/ace-template.js"></script>
+    <title>网点信息</title>
+</head>
+<body>
+<div id="main">
+	<p class="rightShare">发送给客户</p>
+    <div id="company">
+
+    </div>
+</div>
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=LKeG9DmXG7AN4MMoPP5waUGf"></script>
+<script>
+	var Bridge;
+	var callData={"id":"01"};
+	if(/(Android)/i.test(navigator.userAgent)){
+		console.log(1);
+		document.addEventListener('WebViewJavascriptBridgeReady', onBridgeReady, false);
+		function onBridgeReady(event) {
+			Bridge = event.bridge;
+			Bridge.init(function (message, responseCallback) {
+				console.log('JS got a message', message);
+			});
+			Bridge.callHandler("getUserToken",callData,function(response) {
+				console.log(response)
+        		response=JSON.parse(response);
+        		var token = response.token;
+        		console.log(response)
+        		console.log(token)
+        	    $.ajax({
+        	        type:"GET",
+        	        url:url,
+        	        async:false,
+        	        headers:{"Authorization":"Bearer "+token},
+        	        success:function(data){
+        	            if(data.errorCode=='401'){
+        	                Bridge.callHandler("reLogin",callData,null);
+        	                return;
+        	            }
+        	            code = data.data.businessCity.code=='undefined'?"000000":data.data.businessCity.code;
+        	        },
+					error:function(){
+						code = "000000";
+					}
+        	    });
+        	    console.log("code");
+            	console.log(code);
+            	var jsonData = getCityJson(code);
+                var isShare = GetQueryString("share");
+                if(isShare == 1){
+                	$(".rightShare").hide();
+                }
+            	var html = AceTemplate.format("city-option-tmpl",jsonData);
+                $("#company").html(html);
+                MAP(jsonData);
+			});
+		}
+	}else if(/(iPhone|iPad|iPod|iOS)/i.test(navigator.userAgent)){
+		function setupWebViewJavascriptBridge(callback) {
+			if (window.WebViewJavascriptBridge) { return callback(WebViewJavascriptBridge); }
+			if (window.WVJBCallbacks) { return window.WVJBCallbacks.push(callback); }
+			window.WVJBCallbacks = [callback];
+			var WVJBIframe = document.createElement('iframe');
+			WVJBIframe.style.display = 'none';
+			WVJBIframe.src = 'https://__bridge_loaded__';
+			document.documentElement.appendChild(WVJBIframe);
+			setTimeout(function() { document.documentElement.removeChild(WVJBIframe) }, 0)
+		}
+		setupWebViewJavascriptBridge(function(bridge) {
+			Bridge =bridge;
+			bridge.callHandler("getUserToken",callData,function(response) {
+				console.log(response)
+        		response=JSON.parse(response);
+        		var token = response.token;
+        		console.log(response)
+        		console.log(token)
+        	    $.ajax({
+        	        type:"GET",
+        	        url:url,
+        	        async:false,
+        	        headers:{"Authorization":"Bearer "+token},
+        	        success:function(data){
+        	            if(data.errorCode=='401'){
+        	                Bridge.callHandler("reLogin",callData,null);
+        	                return;
+        	            }
+        	        	code = data.data.businessCity.code=='undefined'?"000000":data.data.businessCity.code;
+        	        },
+					error:function(){
+						code = "000000";
+					}
+        	    });
+        	    console.log("code");
+            	console.log(code);
+            	var jsonData = getCityJson(code);
+                var isShare = GetQueryString("share");
+                if(isShare == 1){
+                	$(".rightShare").hide();
+                }
+            	var html = AceTemplate.format("city-option-tmpl",jsonData);
+                $("#company").html(html);
+                MAP(jsonData);
+			});
+		});
+	}else{
+		console.log(3);
+		console.log("PC");
+	}
+    var info =[{'code':'000000',"cityData":{
+        'name':'深圳总部',
+        'addr':'深圳市南山区铜鼓路39号大冲国际中心5号楼34层',
+        'postcode':'邮编： 518048',
+        'phone':'联系电话：0755-84034000',
+        'fax':'传真：0755-25531696',
+        'mail':'邮箱：XXX@dashuf.com.cn',
+        'branch':'',
+        'homepage':'公司主页：http://www/dashuf.com',
+        'point':[[22.547868,113.960136]] //第一个是Y 第二个是X
+        }}
+        ,{'code':'100100',"cityData":{
+            'name':'深圳分公司',
+            'addr':['福田区民田路178号华融大厦7楼','龙岗区龙翔大道万科天誉中央广场D座低区1408室'],
+            'postcode':'邮编： 518048',
+            'phone':'联系电话：0755-84034000',
+            'fax':'传真：0755-25531696',
+            'mail':'邮箱：XXX@dashuf.com.cn',
+            'branch':['福田华融大厦服务中心','龙岗万科天誉中央广场服务中心'],
+            'point':[[22.5436120000,114.0603360000],[22.7211160000,114.2511530000]]
+            }
+        }
+        ,{"code":"100200","cityData":{
+            'name':'广州分公司',
+            'addr':'天河区体育西路191号B塔1803-1809房',
+            'postcode':'邮编： 518048',
+            'phone':'联系电话：0755-84034000',
+            'fax':'传真：0755-25531696',
+            'mail':'邮箱：XXX@dashuf.com.cn',
+            'branch':'中石化大厦服务中心',
+            'homepage':'公司主页：http://www/dashuf.com',
+            'point':[[23.1463440000,113.3274110000]] //第一个是Y 第二个是X
+        }}
+        ,{"code":"100300","cityData":{
+            'name':'东莞分公司',
+            'addr':'莞城区旗峰路汇峰中心F区701',
+            'postcode':'邮编： 518048',
+            'phone':'联系电话：0755-84034000',
+            'fax':'传真：0755-25531696',
+            'mail':'邮箱：XXX@dashuf.com.cn',
+            'branch':'汇峰中心服务中心',
+            'homepage':'公司主页：http://www/dashuf.com',
+            'point':[[23.0319470000,113.7680680000]] //第一个是Y 第二个是X
+        }}
+        ,{"code":"100400","cityData":{
+            'name':'重庆分公司',
+            'addr':'江北区江北嘴IFS国金中心T2栋609室',
+            'postcode':'邮编： 518048',
+            'phone':'联系电话：0755-84034000',
+            'fax':'传真：0755-25531696',
+            'mail':'邮箱：XXX@dashuf.com.cn',
+            'branch':'国金中心服务中心',
+            'homepage':'公司主页：http://www/dashuf.com',
+            'point':[[29.5807810000,106.5803090000]] //第一个是Y 第二个是X
+        }}
+        ,{"code":"100500","cityData":{
+            'name':'北京分公司',
+            'addr':'朝阳区光华路丙12号数码01大厦502-504室',
+            'postcode':'邮编： 518048',
+            'phone':'联系电话：0755-84034000',
+            'fax':'传真：0755-25531696',
+            'mail':'邮箱：XXX@dashuf.com.cn',
+            'branch':'',
+            'homepage':'公司主页：http://www/dashuf.com',
+            'point':[[39.9187750000,116.4658730000]] //第一个是Y 第二个是X
+        }}
+        ,{"code":"100600","cityData": {
+            'name':'天津分公司',
+            'addr':'红桥区张自忠路5号海河华鼎大厦A座7层',
+            'postcode':'邮编： 518048',
+            'phone':'联系电话：0755-84034000',
+            'fax':'传真：0755-25531696',
+            'mail':'邮箱：XXX@dashuf.com.cn',
+            'branch':'海河华鼎大厦服务中心',
+            'homepage':'公司主页：http://www/dashuf.com',
+            'point':[[39.1531260000,117.1990330000]] //第一个是Y 第二个是X
+        }}
+        ,{"code":"100700","cityData": {
+            'name':'武汉分公司',
+            'addr':'武昌区汉街总部国际C座23A',
+            'postcode':'邮编： 518048',
+            'phone':'联系电话：0755-84034000',
+            'fax':'传真：0755-25531696',
+            'mail':'邮箱：XXX@dashuf.com.cn',
+            'branch':'汉街总部国际服务中心',
+            'homepage':'公司主页：http://www/dashuf.com',
+            'point':[[30.5603560000,114.3511830000]] //第一个是Y 第二个是X
+        }}
+       ,{"code":"100900","cityData":{
+            'name':'长沙分公司',
+            'addr':'开福区中山路589号万达广场C区1号楼2103',
+            'postcode':'邮编： 518048',
+            'phone':'联系电话：0755-84034000',
+            'fax':'传真：0755-25531696',
+            'mail':'邮箱：XXX@dashuf.com.cn',
+            'branch':'开福万达广场服务中心',
+            'homepage':'公司主页：http://www/dashuf.com',
+            'point':[[28.2076700000,112.9781040000]] //第一个是Y 第二个是X
+        }}
+        ,{"code":"101100","cityData":{
+            'name':'南昌分公司',
+            'addr':'红谷滩新区绿地中央广场双子塔A2栋1305-1306',
+            'postcode':'邮编： 518048',
+            'phone':'联系电话：0755-84034000',
+            'fax':'传真：0755-25531696',
+            'mail':'邮箱：XXX@dashuf.com.cn',
+            'branch':'绿地中央广场服务中心',
+            'homepage':'公司主页：http://www/dashuf.com',
+            'point':[[28.6912300000,115.8607580000]] //第一个是Y 第二个是X
+        }}
+        ,{"code":"101200","cityData":{
+            'name':'珠海分公司',
+            'addr':'香洲区拱北九州大道西2021号中海富华里B座405室',
+            'postcode':'邮编： 518048',
+            'phone':'联系电话：0755-84034000',
+            'fax':'传真：0755-25531696',
+            'mail':'邮箱：XXX@dashuf.com.cn',
+            'branch':'中海富华里服务中心',
+            'homepage':'公司主页：http://www/dashuf.com',
+            'point':[[22.2402830000,113.5477200000]] //第一个是Y 第二个是X
+        }}
+        ,{"code":"101300","cityData":{
+            'name':'南京分公司',
+            'addr':'南京市建邺区汉中门大街65号11楼',
+            'postcode':'邮编： 518048',
+            'phone':'联系电话：0755-84034000',
+            'fax':'传真：0755-25531696',
+            'mail':'邮箱：XXX@dashuf.com.cn',
+            'branch':'莫愁湖服务中心',
+            'homepage':'公司主页：http://www/dashuf.com',
+            'point':[[32.0430550000,118.7642250000]] //第一个是Y 第二个是X
+        }}
+        ,{"code":"101400","cityData":{
+            'name':'苏州分公司',
+            'addr':'苏州工业园区华池街88号1幢6楼03B、05单元',
+            'postcode':'邮编： 518048',
+            'phone':'联系电话：0755-84034000',
+            'fax':'传真：0755-25531696',
+            'mail':'邮箱：XXX@dashuf.com.cn',
+            'branch':'华池街服务中心',
+            'homepage':'公司主页：http://www/dashuf.com',
+            'point':[[31.3293600000,120.7212620000]] //第一个是Y 第二个是X
+        }}
+        ,{"code":"101500","cityData":{
+            'name':'佛山分公司',
+            'addr':'广东省佛山市禅城区石湾镇街道季华五路2号卓远国际商务中心一座1406室',
+            'postcode':'邮编： 518048',
+            'phone':'联系电话：0755-84034000',
+            'fax':'传真：0755-25531696',
+            'mail':'邮箱：XXX@dashuf.com.cn',
+            'branch':'卓远国际服务中心',
+            'homepage':'公司主页：http://www/dashuf.com',
+            'point':[[23.0171760000,113.1107500000]] //第一个是Y 第二个是X
+        }}
+        ,{"code":"101600","cityData":{
+            'name':'厦门分公司',
+            'addr':'思明区筼筜街道思明区七星西路178号七星大厦24楼',
+            'postcode':'邮编： 518048',
+            'phone':'联系电话：0755-84034000',
+            'fax':'传真：0755-25531696',
+            'mail':'邮箱：XXX@dashuf.com.cn',
+            'branch':'七星大厦服务中心',
+            'homepage':'公司主页：http://www/dashuf.com',
+            'point':[[24.4947950000,118.1027100000]] //第一个是Y 第二个是X
+        }}
+        ,{
+        	"code":"101700",
+        	"cityData":{
+            'name':'上海分公司',
+            'addr':'浦东新区浦东南路360号新上海国际大厦5层A座',
+            'postcode':'邮编： 518048',
+            'phone':'联系电话：0755-84034000',
+            'fax':'传真：0755-25531696',
+            'mail':'邮箱：XXX@dashuf.com.cn',
+            'branch':'新上海国际大厦服务中心',
+            'homepage':'公司主页：http://www/dashuf.com',
+            'point':[[31.2446040000,121.5160600000]] //第一个是Y 第二个是X
+        }}
+        ,{
+        	"code":"101800",
+        	"cityData":{
+                'name':'成都分公司',
+                'addr':'高新区萃华路89号成都国际科技节能大厦A座2005',
+                'postcode':'邮编： 518048',
+                'phone':'联系电话：0755-84034000',
+                'fax':'传真：0755-25531696',
+                'mail':'邮箱：XXX@dashuf.com.cn',
+                'branch':'国际科技节能大厦服务中心',
+                'homepage':'公司主页：http://www/dashuf.com',
+                'point':[[30.5552280000,104.0726620000]] //第一个是Y 第二个是X
+            }
+        }];
+    var code = GetQueryString("code");
+    var url = "http://"+window.location.host+"/v1/profile";
+    $(function(){
+        if(code==null){
+            console.log(Bridge);
+        }else{
+        	var jsonData = getCityJson(code);
+            var isShare = GetQueryString("share");
+            if(isShare == 1){
+            	$(".rightShare").hide();
+            }
+        	var html = AceTemplate.format("city-option-tmpl",jsonData);
+            $("#company").html(html);
+            MAP(jsonData);
+        }
+        $(".rightShare").click(function(){
+			console.log("分享好友");
+			 var json = {};
+				json.webUrl = window.location.href+"?code="+code+"&share=1";   
+				json.title = "请查看评估神面签中心地址";
+				json.description = "你申请的产品已可以面签，地址戳我查看";
+				json.imgUrl = "http://"+window.location.host+"/static/img/shareicon.png";
+			Bridge.callHandler("share",json);
+        });
+    })
+    //后台ajax获取方法
+	function backAjax(URL,head){
+	    $.ajax({
+	        type:"GET",
+	        url:URL,
+	        async:false,
+	        headers:head,
+	        success:function(data){
+	        	code = data.data.businessCity.code;
+	        }
+	    });
+	}
+    function getCityJson(num){
+        for(var i=0;i<info.length;i++){
+            if(num == info[i].code){
+            	return info[i].cityData;
+            }
+        }
+        return info[0].cityData;
+    }
+    function MAP(data){
+    	for(var i = 0;i<data.point.length;i++){
+            var  pointx = data.point[i][1];
+            var  pointy = data.point[i][0];
+            var map = new BMap.Map("map"+i);
+            var point = new BMap.Point(pointx, pointy);
+            map.centerAndZoom(point,15);
+            map.addControl(new BMap.NavigationControl());
+            var marker = new BMap.Marker(point);
+            map.enableScrollWheelZoom();//启动鼠标滚轮缩放地图
+//            map.enableKeyboard();//启动键盘操作地图
+            map.addOverlay(marker);
+            var stCtrl = new BMap.PanoramaControl();
+            stCtrl.setOffset(new BMap.Size(30, 30));
+            map.addControl(stCtrl);
+    	}
+    }
+    // 获取ID
+    function GetQueryString(name) {
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)","i");
+        var r = window.location.search.substr(1).match(reg);
+        if (r!=null) return (r[2]); return null;
+    }
+    function copyAddr(dom){
+    	var Url2=$(dom).prev(".left").html();
+    	copyToClipboard(Url2);
+    }
+</script>
+<script id="city-option-tmpl" type="text/html">
+<div class="comName">
+   <h3 class="left">#{this.name}</h3>
+</div>
+for(var i = 0;i<this.point.length;i++){
+
+        <div class="information">
+            <ul>
+                <li>
+                    <div>
+                        <span class="left" style="font-weight:bold;">#{this.point.length>1?this.branch[i]:this.branch}</span>
+                    </div>
+                </li>
+                <li>
+                    <div>
+                        <p class="left">地址：#{this.point.length>1?this.addr[i]:this.addr}</p>
+                    </div>
+                </li>
+            </ul>
+            <div id="map#{i}"></div>
+        </div>
+}
+</script>
+</body>
+</html>

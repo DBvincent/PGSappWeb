@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="" content=""/>
+    <meta name="keyword" content=""/>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, maximum-scale=1.0,user-scalable=0">
+    <link rel="stylesheet" href="css/opinion.css">
+    <!--<script src="../../../js/common/domainName.js"></script>-->
+    <script src="js/opinion.js"></script>
+    <script src="../../js/zepto.js"></script>
+    <title>意见反馈</title>
+</head>
+<body>
+    <div id="main">
+        <div class="question">
+            <div class="header">
+                <h3>
+                    <span class="name">常见问题</span>
+                </h3>
+            </div>
+            <div class="section">
+                <ul></ul>
+            </div>
+        </div>
+        <div class="suggest">
+            <div class="header">
+                <h3>
+                    <span class="name">还有其他建议或者意见？</span>
+                </h3>
+            </div>
+            <div class="content">
+                <div>
+                    <p>我要吐槽</p>
+                    <div class="suggestCon" contenteditable="true"></div>
+                </div>
+            </div>
+            <div class="BTN">
+                <button type="button">提交</button>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+    var url ="../../v1/suggestions";
+    var content="";
+    var backstage={
+        data:[
+            {
+                "name":"邀请好友注册"
+            },
+            {
+                "name":"登录与密码"
+            },
+            {
+                "name":"推荐客户"
+            },
+            {
+                "name":"佣金"
+            },
+            {
+                "name":"消息推送"
+            },
+            {
+                "name":"邀请好友注册"
+            },
+            {
+                "name":"征信授权材料回收"
+            },
+            {
+                "name":"不知道如何使用app或者不了解产品"
+            }
+        ]
+    };
+
+    Question(backstage.data);
+
+    document.querySelector("#main .question .section ul").addEventListener("click",function(e){
+        var target= e.target;
+        if(target.nodeName=="DIV"){
+            target.parentNode.style.backgroundColor="#dddddd";
+            var timer=setTimeout(function(){
+                target.parentNode.style.backgroundColor="#ffffff";
+            },200);
+            content=content=target.previousSibling.innerHTML;
+        }
+        if(target.nodeName=="IMG"){
+            target.parentNode.parentNode.style.backgroundColor="#dddddd";
+            var timer=setTimeout(function(){
+                target.parentNode.parentNode.style.backgroundColor="#ffffff";
+            },200);
+            content=target.parentNode.previousSibling.innerHTML;
+        }
+        if(target.nodeName=="P"){
+            target.parentNode.style.backgroundColor="#dddddd";
+            var timer=setTimeout(function(){
+                target.parentNode.style.backgroundColor="#ffffff";
+            },200);
+            content=target.innerHTML;
+        }
+        localStorage.setItem("content",content);
+        console.log(localStorage);
+        self.location="../question/index.html";
+    });
+
+    //按钮跳转
+    $(".BTN button").click(function(){
+//        astrict();
+        GetSuggest();
+    });
+
+    //获取意见跟建议的内容
+    function GetSuggest(){
+        var suggestCon=$(".suggest .content .suggestCon").html();
+        if(suggestCon==""){
+        	Bridge.callHandler("showToast","请输入你的吐槽内容");
+        	return;
+        }
+        if(suggestCon.length>=1000){
+        	Bridge.callHandler("showToast","最多输入1000字！");
+        	return;
+        }
+        Bridge.callHandler("getUserToken",callData,function(response) {
+        	Bridge.callHandler("showProgressHUD","正在提交");
+            HEADER(response);
+            backAjax(url,{"title":"我要吐槽","content":suggestCon,"categoryCode":"10"},headers);
+        });
+    }
+
+    //问题列表写入
+    function Question(data){
+         var LI="";
+          for(var i=0;i<data.length;i++){
+              LI+='<li>'
+                        +'<p class="left">'+data[i].name+'</p>'
+                        +'<div class="Image right">'
+                            +'<img class="right" src="img/arrow.svg" alt="">'
+                        +'</div>';
+                   +'</li>';
+          }
+        $("#main .section ul").append(LI);
+    }
+
+    //限制文本域的字数
+    function astrict(){
+        if($(".content .suggestCon").html().length>=1000){
+            NativeCall(ele, Bridge,funName,data);
+        }
+    }
+    //nactive异步交互
+    function NativeCall(ele, Bridge,funName,data){
+        Bridge.callHandler(funName, data, function(response) {
+            dispose(ele,response);
+        });
+    }
+</script>
+</html>

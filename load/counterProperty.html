@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+		<link rel="stylesheet" type="text/css" href="css/counterProperty.css"/>
+		<link rel="stylesheet" type="text/css" href="css/LArea.css"/>
+		<script src="../js/jquery-1.9.1.min.js"></script>
+		<script src="../js/commonality.js"></script>
+		<script src="../js/verification.js"></script>
+		<script src="js/LArea.js"></script>
+		<script src="js/CounterCompanyData.js"></script>
+		<script src="js/counterProperty.js"></script>
+		<script src="../js/Native.js"></script>
+		<title>补充信息</title>
+	</head>
+	<body>
+		<header>
+			<img src="img/headerCH.svg"/>
+		</header>
+		<div id="content">
+			<div>
+				<div class="block" id="input-money">
+					<ul>
+						<li>
+							<span class="li-left">申请金额</span>
+							<div class="li-right">
+								<input type="number" name="money" id="money" value="" placeholder="必填" />
+								<i>万</i>
+							</div>
+						</li>
+					</ul>
+				</div>
+				<div class="block" id="input-info">
+					<ul>
+						<li class="line">
+							<span class="li-left">客户手机</span>
+							<div class="li-right">
+								<input type="tel" name="telphone" id="telphone" value="" placeholder="必填" />
+							</div>
+						</li>
+						<li class="line">
+							<span class="li-left">同行公司</span>
+							<div class="li-right">
+								<div id="select-area">
+									<div class="content-block">
+										<span id="counterCompany">同行放款公司名称</span>
+										<div class="arrow"></div>
+									</div>
+								</div>
+							</div>
+						</li>
+						<li>
+							<span class="li-left">同行放款金额</span>
+							<div class="li-right">
+								<input type="number" name="counterMoney" id="counterMoney" value="" placeholder="必填" />
+								<i>万</i>
+							</div>
+						</li>
+					</ul>
+				</div>
+				<div class="block" id="input-if">
+					<ul>
+						<li class="line" id="has-car">
+							<span class="li-left">名下是否有车</span>
+							<img class="li-right" src="img/off.svg"/>
+						</li>
+						<li id="has-house">
+							<span class="li-left">名下是否有房</span>
+							<img class="li-right" src="img/off.svg"/>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div>
+				<p>如有同行放款证明材料，请上传（如合同、截屏等）</p>
+				<div class="uploadImg">
+					<div>
+						<img src="img/id.svg"/>
+					</div>
+					<div class="addIcon"></div>
+					<div id="deleteImg">
+                    	<button type="button">X</button>
+                	</div>
+				</div>
+			</div>
+		</div>
+		<div id="sure" class="btn-sumbit">
+			<button type="button">提交</button>
+		</div>
+		<div id="content-submit">
+			<div id="box-submit">
+				<div id="box">
+				    <div id="box-content">
+				    	<div  class="close" id="close">X</div>
+				        <div class="top">
+				            <p>同意向客户推荐其他产品以提升通过率</p>
+				        </div>
+				        <ul>
+				            <li>
+				                <div class="left-content">
+				                    <p>始终同意<i>更高通过率</i></p>
+				                    <span>此后你推荐的客户均默认匹配更多可申请产品</span>
+				                </div>
+				                <div class="right-content">
+				                    <img src="img/check.svg" alt="">
+				                </div>
+				            </li>
+				            <li>
+				                <div class="left-content">
+				                    <p>仅同意本客户</p>
+				                    <span>该客户将会匹配更多可申请产品</span>
+				                </div>
+				                <div class="right-content">
+				                    <img src="img/check.svg" alt="">
+				                </div>
+				            </li>
+				            <li>
+				                <div class="left-content">
+				                    <p>不同意</p>
+				                    <span>该客户放弃匹配其他产品机会</span>
+				                </div>
+				                <div class="right-content">
+				                    <img src="img/check.svg" alt="">
+				                </div>
+				            </li>
+				        </ul>
+				        <div class="BTN">
+				            <div id="sumbit">确认提交</div>
+				        </div>
+				    </div>
+				</div>
+			</div>
+		</div>
+		<div id="layer"></div>
+	</body>
+</html>

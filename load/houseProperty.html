@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="" content=""/>
+    <meta name="keyword" content=""/>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, maximum-scale=1.0,user-scalable=0">
+    <link rel="stylesheet" href="css/houseProperty.css">
+    <link rel="stylesheet" href="css/LArea.css">
+    <script src="../js/jquery-1.9.1.min.js"></script>
+    <script src="js/housePropertyData.js"></script>
+    <script src="../js/verification.js"></script>
+    <script src="../js/commonality.js"></script>
+    <script src="../js/Native.js"></script>
+    <script src="js/LArea.js"></script>
+    <script src="js/house.js" type="text/javascript" charset="utf-8"></script>
+    <title>补充信息</title>
+</head>
+<body>
+<div class="main">
+    <div id="main">
+        <div id="header">
+            <img src="img/headerCH.svg" alt="">
+        </div>
+        <div id="information">
+            <ul>
+                <li>
+                    <p>申请金额</p>
+                    <div>
+                        <input type="number" class="money" placeholder="必填"/>
+                        <i>万</i>
+                    </div>
+                </li>
+                <li>
+                    <p>电话号码</p>
+                    <div>
+                        <input type="tel" class="tel" placeholder="必填"/>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div id="housing">
+            <div>
+                <span>请补充房产信息</span>
+            </div>
+            <div id="other">
+                <ul>
+                    <li>
+                        <p>面积</p>
+                        <div>
+                            <input  class="area" type="number" placeholder="必填"/>
+                            <b>㎡</b>
+                        </div>
+                    </li>
+                    <li>
+                        <p>地址</p>
+                        <div>
+                            <span id="location">请选择</span>
+                            <i></i>
+                        </div>
+                    </li>
+                    <li>
+                        <input type="text" class="detailedAddress" placeholder="请输入地址">
+                    </li>
+                    <li id="installment">
+                        <p>是否有按揭</p>
+                        <img  src="img/off.svg" alt="">
+                    </li>
+                    <li class="installment">
+                        <p class="left">按揭状况</p>
+                        <div class="right">
+                            <span id="mortgage">请选择</span>
+                            <i></i>
+                        </div>
+                    </li>
+                    <li id="property">
+                        <p>是否有抵押贷款</p>
+                        <img  src="img/off.svg" alt="">
+                    </li>
+                    <li>
+                        <p>房屋产权</p>
+                        <div>
+                            <span id="houseEquity">请选择</span>
+                            <i></i>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div id="datum">
+            <div>
+                <span>如有房产证材料，请上传（如房产证）</span>
+            </div>
+            <div class="datumImg">
+                <div class="IMG">
+                    <img  src="img/id.svg" alt="">
+                </div>
+                <div class="addIcon">
+                </div>
+                <div id="closeImg">
+                    <button type="button">X</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="sure">
+    <button type="button">确认</button>
+</div>
+<div id="content-submit">
+    <div id="box-submit">
+        <div id="box">
+            <div id="box-content">
+                <div  class="close" id="close">X</div>
+                <div class="top">
+                    <p>同意向客户推荐其他产品以提升通过率</p>
+                </div>
+                <ul>
+                    <li>
+                        <div class="left-content">
+                            <p>始终同意<i>更高通过率</i></p>
+                            <span>此后你推荐的客户均默认匹配更多可申请产品</span>
+                        </div>
+                        <div class="right-content">
+                            <img src="img/check.svg" alt="">
+                        </div>
+                    </li>
+                    <li>
+                        <div class="left-content">
+                            <p>仅同意本客户</p>
+                            <span>该客户将会匹配更多可申请产品</span>
+                        </div>
+                        <div class="right-content">
+                            <img src="img/check.svg" alt="">
+                        </div>
+                    </li>
+                    <li>
+                        <div class="left-content">
+                            <p>不同意</p>
+                            <span>该客户放弃匹配其他产品机会</span>
+                        </div>
+                        <div class="right-content">
+                            <img src="img/check.svg" alt="">
+                        </div>
+                    </li>
+                </ul>
+                <div class="BTN">
+                    <div id="sumbit">确认提交</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="layer"></div>
+</body>
+</html>
