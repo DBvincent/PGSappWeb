@@ -1,6 +1,4 @@
-/**
- * Created by ex-dongbo on 2017/4/13.
- */
+/*Created by ex-dongbo on 2017/4/13.*/
 var Bearer="Bearer ";
 var Bridge;
 var ispopup;

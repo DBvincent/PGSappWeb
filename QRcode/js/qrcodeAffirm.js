@@ -1,7 +1,7 @@
 var obj={};
 $(function(){
 	find();
-	writeIn(obj);
+	writeIn();
 	clickView();
 });
 
@@ -17,7 +17,8 @@ function eacheCode(data){
 }
 
 //写入内容
-function writeIn(obj){
+function writeIn(){
+	console.log("进入写入");
 	if(eacheCode(DATA)){
 		$("#InviteCode").val(obj.InviteCode);
 	}else{
@@ -48,3 +49,14 @@ function clickView(){
    function save(){
         localStorage.setItem("InviteCode",$("#InviteCode").val());
    } 
+   
+//获取web storage 数据
+   	function find(){
+        var storage = window.localStorage;
+        for(var i=0; i < storage.length; i++){
+            var key = storage.key(i);
+            var value = storage.getItem(key);
+            obj[key]=value;
+        }
+        console.log(obj);
+    }

@@ -3,12 +3,52 @@
 	<head>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width,initial-scale=1.0, maximum-scale=1.0,minimum-scale=1.0, user-scalable=0">
+		<link rel="stylesheet" href="css/bank.css" />
+		<script src="../js/jquery-2.1.4.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/verification.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/bank.js" type="text/javascript" charset="utf-8"></script>
 		<title></title>
 	</head>
 	<body>
-		<header>
-			<img src="" alt="" />
-		</header>
-		<div></div>
+		<div class="identity">
+			<div class="description">
+				<i></i><span>请确认一下为本人信息及信息真实有效</span>
+			</div>
+			<ul>
+				<li class="line">
+					<span>客户姓名</span>
+					<input type="text" id="name" data-verify="verifyName" placeholder="必填"/>
+				</li>
+				<li class="line">
+					<span>客户身份证号</span>
+					<input type="text" id="idCode" data-verify="verifyIdCode" placeholder="必填"/>
+				</li>
+				<li>
+					<span>客户手机</span>
+					<input type="tel" id="tel" data-verify="verifyTelphone" placeholder="必填"/>
+				</li>
+			</ul>
+		</div>
+		<div class="bankCode">
+			<div class="description">
+				请输入与手机号匹配的银行卡号
+			</div>
+			<ul>
+				<li class="line">
+					<span>银行卡</span>
+					<input type="text" id="bankCode" data-verify="verifyBankNumber" placeholder="必填"/>
+				</li>
+				<li>
+					<span>
+						验证码
+						<input type="text" id="verifyCode" data-verify="verifyInviteCode" placeholder="必填"/>
+					</span>
+					<p><span id="verificationCode">获取短信验证码</span></p>
+				</li>
+			</ul>
+		</div>
+		<div id="sure">
+			<button type="button">下一步</button>
+		</div>
 	</body>
 </html>

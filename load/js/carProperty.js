@@ -171,7 +171,7 @@ function  inputView(){
 function NativeCall(ele, Bridge, funName, data) {
     if(Bridge){
         Bridge.callHandler(funName, data, function (response) {
-            console.log(1);
+            //console.log(1);
             dispose(ele, response);
         });
     }
@@ -207,11 +207,11 @@ function getDATA() {
         carDATA.carLoan = "Y";
     }
     carDATA.notcategoryCode = 'N';
-    console.log(carDATA);
+    //console.log(carDATA);
 }
 
 function TOAjax(URL,DATA,headers){
-    console.log("进入请求");
+    //console.log("进入请求");
     $.ajax({
         type:"POST",
         url:URL,
@@ -223,7 +223,7 @@ function TOAjax(URL,DATA,headers){
         },
         success:function(data){
             if(data.succeed){
-                console.log("成功");
+                //console.log("成功");
                 getDATA();
                 $.ajax({
                     type:"POST",
@@ -234,11 +234,11 @@ function TOAjax(URL,DATA,headers){
                     contentType:'application/json',
                     success:function(data){
                         if(data.succeed){
-                            console.log("成功,不需要图片");
+                            //console.log("成功,不需要图片");
                             NativeCall(this,Bridge,"hideProgressHUD","");
                             NativeCall(this,Bridge,"applySucess","");
                         }else{
-                        	console.log(data.message);
+                        	//console.log(data.message);
                         	NativeCall(this,Bridge,"hideProgressHUD","");
             				NativeCall(this,Bridge,"showToast","服务器开小差了，稍后再试吧");
                         }
@@ -255,7 +255,7 @@ function TOAjax(URL,DATA,headers){
 
 // 实时校验数据
 function verifyData() {
-    console.log("验证");
+    //console.log("验证");
     if($("#money").val() == ""||$("#carNumber").val()==""||$("#tel").val() == ""||$("#carNumberTop").html()=="请选择"||$("#carNumberTop").html()=="不能为空"||$("#carProperty").html()=="请选择"||$("#carProperty").html()=="不能为空") {
         closeButton();
         return false;

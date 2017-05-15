@@ -127,6 +127,40 @@ function  verifyInviteCode(ele){
         closeButton();
 	}
 }
+//身份证验证
+function verifyIdCode(ele){
+	var val=$(ele).val();
+	if(val==""){
+		$(ele).addClass("error");
+        $(ele).val("");
+        $(ele).attr("placeholder","身份证不能为空");
+        closeButton();
+	}else if(!(/^\d{6}(18|19|20)?\d{2}(0[1-9]|1[12])(0[1-9]|[12]\d|3[01])\d{3}(\d|X)$/i.test(val))){
+		$(ele).addClass("error");                            
+		$(ele).val("");                                      
+		$(ele).attr("placeholder","身份证输入有误");                 
+		closeButton();                                       
+	}else{
+		$(ele).val(val);
+	}
+}
+//银行卡验证
+function verifyBankNumber(ele){
+	var val=$(ele).val();
+	if(val==""){
+		$(ele).addClass("error");
+        $(ele).val("");
+        $(ele).attr("placeholder","银行卡不能为空");
+        closeButton();
+	}else if(!(/^(\d{16}|\d{19})$/.test(val))){
+		$(ele).addClass("error");                            
+		$(ele).val("");                                      
+		$(ele).attr("placeholder","银行卡输入有误");                 
+		closeButton();                                       
+	}else{
+		$(ele).val(val);
+	}
+}
 // 锁按钮函数
 function closeButton(){
     $("#sure button").attr("disabled","disabled");

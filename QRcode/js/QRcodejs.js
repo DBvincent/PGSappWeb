@@ -47,15 +47,4 @@ function judgeButton(ele){
 		self.location="qRcode.html";
 	}
 }
-   //获取web storage 数据
-   	function find(){
-        var storage = window.localStorage;
-        for (var i=0, len = storage.length; i  <  len; i++){
-            var key = storage.key(i);
-            var value = storage.getItem(key);
-            obj[key]=value;
-            console.log(key + "=" + value);
-        }
-        console.log(obj);
-    }
   
