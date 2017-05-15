@@ -1,0 +1,89 @@
+html{
+    font-size:12px;
+}
+body,div,ul,li,p,h1,h2,h3,h4,h5,dl,dt,dd,ol{
+    margin: 0; padding: 0;
+}
+li{
+    list-style: none;
+}
+.left{
+    float:left;
+}
+.right{
+    float:right;
+}
+body{
+    font-family: "微软雅黑";
+    box-sizing: border-box;
+    color:#666666;
+    background:#f0f0f0;
+    width: 100%;
+    height:100%;
+}
+#information,#other,#supplement{
+    margin-top:1rem;
+    background:#ffffff;
+}
+/*客户信息样式*/
+#information{
+    border-top: 1px solid #f0f0f0;
+    border-bottom: 1px solid #f0f0f0;
+}
+#information ul{
+    padding:0 0.8rem;
+}
+#information ul li{
+    border-bottom: 1px solid #f0f0f0;
+}
+#information ul li:last-child{
+    border-bottom:none;
+}
+#information ul li div{
+    overflow: hidden;
+    padding:1rem 0;
+    font-size:1.4rem;
+}
+/*客户其他信息样式*/
+#other ul li div{
+    overflow: hidden;
+    padding:1rem 0.8rem;
+    border-bottom: 1px solid #f0f0f0;
+    font-size:1.4rem;
+}
+#other ul li div input{
+    border:none;
+    text-align: right;
+    height:2rem;
+}
+#other ul li div span{
+    display: inline-block;
+    color:#b2b2b2;
+}
+#other ul li div span i{
+    position: relative;
+    top:0.1rem;
+    left:0.5rem;
+    display:inline-block;
+    width:1.2rem;
+    height:1.2rem;
+    background:url("../img/arrow.svg") no-repeat;
+}
+/*提交样式*/
+#sure{
+    box-sizing: border-box;
+    width:100%;
+    /*position: fixed;*/
+    /*bottom:0;*/
+    padding:3% 2%;
+    text-align: center;
+}
+#sure button{
+    border:0;
+    color:#ffffff;
+    width:96%;
+    background:#fec43f;
+    font-size:1.4rem;
+    padding:0.5rem 0;
+    border-radius: 0.5rem;
+}
