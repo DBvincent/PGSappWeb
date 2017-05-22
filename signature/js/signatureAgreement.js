@@ -10,15 +10,20 @@ $(function(){
 function clickView(){
 	$("#sure button").click(function(){
 		localStorage.clear();
+		if($("#signature p").get(0)){
+			self.location="signature.html";
+		}else{
+//			self.location="";
+		}
 	});
 }
 
 //判断日否有前面
 function isSignature(obj){
 	if(obj.image){
-		$("#signature").append('<img src='+obj.image+' alt="" />');
+		$("#signature").append('<img src='+obj.image+' alt="" hspace="0" vspace="0"/>');
 	}else{
-		$("#signature").append('<span>请签名</span>');
+		$("#signature").append('<p>请签名</p>');
 	}
 }
 //获取web storage 数据

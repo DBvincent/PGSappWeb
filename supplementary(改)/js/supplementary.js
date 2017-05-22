@@ -121,21 +121,6 @@ window.onload=function(){
 
 };
 
-//获取数据处理函数
-function HEADER(response){
-    response=JSON.parse(response);
-    if(response.result=="01") {
-        headers.Authorization = Bearer + response.token;
-    }else {
-        console.log("result:"+response.result);
-    }
-}
-// 获取产品ID
-function GetQueryString(name) {
-    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)","i");
-    var r = window.location.search.substr(1).match(reg);
-    if (r!=null) return (r[2]); return null;
-}
 //nactive异步交互
 function NativeCall(ele, Bridge,funName,data){
     Bridge.callHandler(funName, data, function(response) {

@@ -97,47 +97,47 @@
 				<img src="" alt="" />
 			</div>
 		</div>
-	</body>
-	<script>
-	var obj={};
-	var invitationCode;
-	var HREF="https://disp-api.banketech.com/static/register/register.html?requestId="
-	$(function(){
-		find();
-		HREF+=obj.InviteCode;
-		console.log(HREF);
-		$("#code").qrcode(HREF); //任意字符串 
-		var src=$("#code canvas")[0].toDataURL("image/png");
-		$("#Image img").attr("src",src);
-		var img1=new Image();
-		var img2=new Image();
-		img1.src=$("#can img").attr("src");
-		img2.src=$("#Image img").attr("src");
-		var canvas = document.getElementById("canvas");
-    	var context = canvas.getContext("2d");
-    	context.font="30px Helvetica";
-    	img1.onload=function(){
-    		context.drawImage(img1,0,0,600,905);
-    	}
-    	img2.onload=function(){
-    		context.drawImage(img2,122,260,360,360);
-    		context.fillText(obj.name,160,699);
-    		context.fillText(obj.tel,300,698);
-      		var srcImg=$("#canvas")[0].toDataURL("image/png");
-      		$("#IMG img").attr("src",srcImg);
-    	}
-	});
-    //获取web storage 数据
-   	function find(){
-        var storage = window.localStorage;
-        for (var i=0, len = storage.length; i  <  len; i++){
-            var key = storage.key(i);
-            var value = storage.getItem(key);
-            obj[key]=value;
-            console.log(key + "=" + value);
-        }
-        console.log(obj);
-    }
-  
+		<script>
+			var time=new Date().getMinutes();
+			var obj={};
+			var invitationCode;
+			var HREF="https://disp-api.banketech.com/static/register/register.html?requestId="
+			$(function(){
+				find();
+				HREF+=obj.InviteCode;
+				console.log(HREF);
+				$("#code").qrcode(HREF); //任意字符串 
+				var src=$("#code canvas")[0].toDataURL("image/png");
+				$("#Image img").attr("src",src);
+				var img1=new Image();
+				var img2=new Image();
+				img1.src=$("#can img").attr("src");
+				img2.src=$("#Image img").attr("src");
+				var canvas = document.getElementById("canvas");
+		    	var context = canvas.getContext("2d");
+		    	context.font="30px Helvetica";
+		    	img1.onload=function(){
+		    		context.drawImage(img1,0,0,600,905);
+		    	}
+		    	img2.onload=function(){
+		    		context.drawImage(img2,122,260,360,360);
+		    		context.fillText(obj.name,160,699);
+		    		context.fillText(obj.tel,300,698);
+		      		var srcImg=$("#canvas")[0].toDataURL("image/png");
+		      		$("#IMG img").attr("src",srcImg);
+		    	}
+			});
+		    //获取web storage 数据
+		   	function find(){
+		        var storage = window.localStorage;
+		        for (var i=0, len = storage.length; i  <  len; i++){
+		            var key = storage.key(i);
+		            var value = storage.getItem(key);
+		            obj[key]=value;
+		            console.log(key + "=" + value);
+		        }
+		        console.log(obj);
+		    } 
 	</script>
+	</body>
 </html>

@@ -7,6 +7,7 @@ window.LArea = (function() {
     }
     MobileArea.prototype = {
         init: function(params) {
+        	console.log(params);
             this.params = params;
             this.trigger = document.querySelector(params.trigger);
             if(params.valueTo){
@@ -302,7 +303,6 @@ window.LArea = (function() {
         finish: function(e) {
             var _self = this;
             var combine = _self.combine;
-            console.log(combine);
             _self.trigger.value = "";
             _self.trigger.innerText = "";
             for(var i = 0; i < _self.idx; i++) {
@@ -320,9 +320,48 @@ window.LArea = (function() {
 	            if(this.valueTo){
 	                this.valueTo.value= sText;
 	            }
+	            _self.chose(_self.trigger,sText,_self.data);
             }
             _self.value = [0, 0, 0];
             _self.close(e);
+        },
+        chose:function(trigger,value,data){
+        	for(var i=0;i<data.length;i++){
+            	if(data[i].name==value){
+                	if(data[i].children){
+                		var occupation=[];
+                		trigger.parentElement.parentElement.nextElementSibling.style.display="block";
+                    	for(var c=0;c<data[i].children.length;c++){
+                        	var obj={};
+                        	obj.name=data[i].children[c].name;
+                        	obj.code=data[i].children[c].code;
+                        	if(data[i].children[c].children){
+                        		obj.children=data[i].children[c].children;
+                        	}
+                        	occupation.push(obj);
+                    	}
+                    	var ele="#"+trigger.parentElement.parentElement.nextElementSibling.children[1].children[0].getAttribute("id"); 
+                    	this.init({
+                        		'trigger':ele,//触发选择控件的文本框，同时选择完毕后name属性输出到该位置
+        						'keys': {
+            						'id':"",
+            						'code':"code",
+            						'name':"name",
+        						}, //绑定数据源相关字段 id对应valueTo的value属性输出 name对应trigger的value属性输出
+        						'type': 1, //数据源类型
+        						'data':occupation, //数据源
+        						'idx': 1,
+        						'combine':['area_province']
+                        });
+                        this.className =['area_province']; // 设置class值
+                	}else{
+                		if(trigger.parentElement.parentElement.nextElementSibling){
+                			trigger.parentElement.parentElement.nextElementSibling.style.display="none";
+                    		trigger.parentElement.parentElement.nextElementSibling.children[1].children[0].innerHTML="请选择"; 
+                		}
+                	}
+            	}      	
+        	}
         },
         close: function(e) {
             e.preventDefault();
@@ -331,7 +370,7 @@ window.LArea = (function() {
             _self.trigger.dispatchEvent(evt);
             document.body.removeChild(_self.gearArea);
             _self.gearArea=null;
-        }
+        } 
     }
     return MobileArea;
-})()
+})();

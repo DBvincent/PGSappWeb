@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1.0, maximum-scale=1.0,minimum-scale=1.0,user-scalable=0">
     <link rel="stylesheet" href="css/supplementary.css">
     <script src="../js/zepto.js"></script>
-    <script src="js/supplementary.js"></script>
+    <script src="js/supplementary.js?time=20170722"></script>
     <title>补充信息</title>
 </head>
 <body>
@@ -299,11 +299,16 @@
         		console.log(data);
         		if(data.succeed){
                     nativeCall(this,Bridge,"hideProgressHUD","");
-                    nativeCall(this,Bridge,"applySucess","");
                     localStorage.clear( );
-        		}
+                    openButton();
+                    nativeCall(this,Bridge,"applySucess","");
+        		}else{
+                    closeButton();
+                    nativeCall(this, Bridge, "showToast", "服务器开小差了，稍后再试吧");
+                }
         	},
             error:function(error){
+            	closeButton();
                 nativeCall(this,Bridge,"hideProgressHUD","");
                 nativeCall(this,Bridge,"showToast","服务器开小差了，稍后再试吧");
             }
@@ -491,6 +496,11 @@
            $(ele).val("金额只能为整数");
            $(ele).css("color","#ef6762");
            closeButton();
+       }else if(parseInt(v) > 5000){
+            $(ele).attr("type", "text");
+            $(ele).val("金额超长");
+            $(ele).css("color", "#ef6762");
+            closeButton();
        }else{
           $(ele).val(v);
        }
@@ -556,6 +566,7 @@
             DATA.commendMore="forever";
             acquireData();
             console.log(DATA);
+            closeButton();
             TOAjax('../../v1/recommends/'+transfersID+'/profile',DATA,headers);
         }
     }

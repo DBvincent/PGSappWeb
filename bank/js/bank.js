@@ -48,20 +48,13 @@ function clickView(){
 		//后台条用ajax
 	});
 	
-	//a标签点击处理
-	$("a").click(function(e){
-		e.preventDefault();
-		//链接跳转
-		self.location="";
-	});
-	
 	//下一步提交
 	$("#sure button").click(function(){
 		if(verifyData()){
 			console.log(1);
 			getData();
 			//后台传输ajax
-			
+			self.location="../signature/signatureAgreement.html";
 		}else{
 			verifyName($("#name"));
 			verifyIdCode($("#idCode"));
@@ -79,11 +72,12 @@ function getData(){
 	bankData.telephone=$("#tel").val();
 	bankData.bankCode=$("#bankCode").val();
 	bankData.verifyCode=$("#verifyCode").val();
+	console.log(bankData);
 }
 
 //验证通过函数
 function verifyData(){
-	if($("#name").val!=""&$("#tel").val()!=""&$("idCode").val()!=""&$("#bankCode").val()!=""&("#verifyCode").val()!=""){
+	if($("#name").val()!=""&$("#tel").val()!=""&$("idCode").val()!=""&$("#bankCode").val()!=""&$("#verifyCode").val()!=""){
 		return true;
 	}else{
 		return false;

@@ -1,7 +1,7 @@
 var obj={};
 $(function(){
 	find();
-	writeIn();
+	writeIn(obj);
 	clickView();
 });
 
@@ -17,7 +17,7 @@ function eacheCode(data){
 }
 
 //写入内容
-function writeIn(){
+function writeIn(obj){
 	console.log("进入写入");
 	if(eacheCode(DATA)){
 		$("#InviteCode").val(obj.InviteCode);

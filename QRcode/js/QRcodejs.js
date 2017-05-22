@@ -1,4 +1,4 @@
-
+var time=new Date().getMinutes();
 //input操作
 function inputView(){
 	
@@ -40,11 +40,11 @@ function verifyInput(ele){
 function judgeButton(ele){
 	var html=$(ele).html();
 	if(html=="点击确认获取邀请码"){
-		self.location="qrcodeAffirm.html";		
+		self.location="qrcodeAffirm.html?time="+time+"";		
 	}else if(html=="确认生成二维码"){
-		self.location="generateQrcode.html";
+		self.location="generateQrcode.html?time="+time+"";
 	}else if(html=="返回"){
-		self.location="qRcode.html";
+		self.location="qRcode.html?time="+time+"";
 	}
 }
   

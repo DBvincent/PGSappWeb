@@ -142,7 +142,7 @@ body{
 #sure{
     box-sizing: border-box;
     width:100%;
-    /*position: fixed;*/
+    position: relative;
     bottom:1rem;
     padding:3% 2%;
     text-align: center;
