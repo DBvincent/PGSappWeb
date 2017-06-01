@@ -153,7 +153,7 @@ body{
     height:6rem;
     border-radius: 5px;
     background-size: 100% 100%;
-    box-shadow: 0px 8px 15px rgba(0,0,0,0.1);
+    /*box-shadow: 0px 8px 15px rgba(0,0,0,0.1);*/
 }
 #datum .datumImg .IMG img{
     /*display: none;*/

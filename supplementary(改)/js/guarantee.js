@@ -32,10 +32,19 @@ $(function(){
 	//获取后台数据
     backAjax(postUrl,transfersID,headers);  
         	
-	
+	clickView();
+	inputView();
 	
 });
 
+function inputView(){
+	$("input").focus(function(){
+		totalVerify.openButton();
+	});
+	$("input").blur(function(){
+		totalVerify.init(this);
+	});
+}
 function clickView(){
 	//保险列表加入
     $("#supplement ul li").click(function(){
@@ -55,7 +64,7 @@ function clickView(){
 	            	'<li>'+
 	                	'<p class="left">年缴保费</p>'+
 	                	'<div>'+
-		            		'<input class="premium" type="number">'+
+		            		'<input class="premium" type="number" data-verify="premiumMoney" placeholder="必填">'+
 		            		'<i>元</i>'+
 	                	'</div>'+
 	            	'</li>'+
@@ -66,37 +75,28 @@ function clickView(){
 
 
     //保险公司选择
-            guarantee.addEventListener("click",function(e){
-                e.stopPropagation();
-                var target= e.target;
-                if(target.nodeName=="SPAN"){
-                    console.log(target.previousElementSibling.innerHTML);
-                	if(target.previousElementSibling.innerHTML=="保险公司"){
-                		target.style.backgroundColor="#dddddd";
-                        var timer=setTimeout(function(){
-                            target.style.backgroundColor="#ffffff";
-                        },200);
-                        console.log(InsuranceData);
-                        openButton();
-                        NativeCall(target,Bridge,"selectInsurance",InsuranceData);	
-                	}
-                }
-                if(target.nodeName=="BUTTON"){
-                    $(target).parent("div").parent("div").remove();
-                }
-            });
+    $("#guarantee").on("click",".insurance",function(){
+    	if($(this).parent().siblings("p").html()=="保险公司"){
+    			
+    	}
+    });
+        
+    //关闭保险公司
+    $("#guarantee").on("click","button",function(){
+    	$(this).parent().parent("div").remove();
+    });
           	
-            //确认跳转
-            $("#sure button").click(function(){
-                 if($(this).html()=="确认"){
-                     acquireInsurance();
-                     save();
-                     console.log(toBackData);
-                     if( $("#sure button").attr("disabled")!="disabled"){
-                         toAjax(toBackData,headers);
-                     }
-                 }
-            });
+    //确认跳转
+    $("#sure button").click(function(){
+        if($(this).html()=="确认"){
+            acquireInsurance();
+            save();
+            console.log(toBackData);
+            if( $("#sure button").attr("disabled")!="disabled"){
+                toAjax(toBackData,headers);
+            }
+        }
+    });
 }
 
 // 获取产品ID
@@ -148,7 +148,7 @@ function find(){
         toBackData.insuranceRequestItems=[];
         console.log(SaveCompany);
         $("#guarantee>div").each(function (i, v) {
-            console.log(i);
+           		console.log(i); 
                 var obj = {};
                 $(v).children("ul").children("li").children("div").each(function (i, v) {
                     if ($(v).children("p").text() == "保险公司") {
@@ -265,7 +265,7 @@ function find(){
 	            				'<li>'+
 	                				'<p class="left">年缴保费</p>'+
 	                				'<div>'+
-		                    			'<input class="premium" type="number">'+
+		                    			'<input class="premium" type="number" data-verify="premiumMoney" placeholder="必填">'+
 		            					'<i>元</i>'+
 	                				'</div>'+
 	            				'</li>'+
@@ -298,7 +298,7 @@ function find(){
 	            				'<li>'+
 	                				'<p class="left">年缴保费</p>'+
 	                				'<div>'+
-		                    			'<input class="premium" type="number">'+
+		                    			'<input class="premium" type="number" data-verify="premiumMoney" placeholder="必填">'+
 		            					'<i>元</i>'+
 	                				'</div>'+
 	            				'</li>'+
@@ -346,19 +346,6 @@ function find(){
         }
     }
 
-    //验证
-    function keyUp(ele) {
-        var v=$(ele).val();
-        if(String(v).indexOf(".")>-1){
-            $(ele).attr("type","text");
-            $(ele).val("金额只能为整数");
-            $(ele).css("color","#ef6762");
-            closeButton();
-        }else{
-            $(ele).val(v);
-        }
-    }
-
     // 锁按钮函数
     function closeButton(){
         $("#sure button").attr("disabled","disabled");
@@ -370,28 +357,3 @@ function find(){
         $("#sure button").css("background","#fec43f");
     }
     
-// 验证贷款金额是否符合要求
-function verifyMoney(ele) {
-    var v = $(ele).val();
-    if(String(v).indexOf(".") > -1) {
-        $(ele).addClass("error");
-        $(ele).val("");
-        $(ele).attr("placeholder","金额只能为整数");
-        closeButton();
-    } else if(v == "" || v == '金额不能为空') {
-        $(ele).addClass("error");
-        $(ele).val("");
-        $(ele).attr("placeholder","金额不能为空");
-        closeButton();
-    } else if(v.substr(0, 1) == "0") {
-        $(ele).addClass("error");
-        $(ele).val("");
-        $(ele).attr("placeholder","金额输入有误");
-    } else if(parseInt(v) > 5000) {
-        $(ele).addClass("error");
-        $(ele).val("");
-        $(ele).attr("placeholder","数值不超过5000万");
-    } else {
-        $(ele).val(v);
-    }
-}

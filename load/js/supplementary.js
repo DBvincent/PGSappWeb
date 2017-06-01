@@ -1,4 +1,4 @@
-/*** Created by ex-dongbo on 2017/3/20.*/
+/**Created by ex-dongbo on 2017/3/20.*/
 var Bridge;
 var callData={"id":"01"};
 var Bearer="Bearer ";
@@ -94,39 +94,39 @@ if(/(Android)/i.test(navigator.userAgent)){
     console.log("PC");
 }
 
-window.onload=function(){
-	localStorage.setItem("token",headers.Authorization);
-    $("#other span").click(function(){
-        $("#sure button").removeAttr("disabled");
-        $("#submitSure .BTN  button").removeAttr("disabled");
-        switch($(this).siblings("p").html()){
-            case "客户类型":
-                openButton();
-                NativeCall(this,Bridge,"selectGenre",genre);
-                break;
-            case "职业":
-                openButton();
-                if(obj.supplementary){
-                    if(obj.supplementary=="1"){
-                        pushOccupation($(this),$(".genre").text(),backstage);
-                    }
-                }
-            	console.log(backstage);
-                NativeCall(this,Bridge,"selectOccupation",occupation);
-                break;
-            case "级别":
-                openButton();
-                if(obj.supplementary){
-                    if(obj.supplementary=="1"){
-                        pushOccupation($(this),$(".occupation").text(),backstage);
-                    }
-                }
-                NativeCall(this,Bridge,"selectLevel",level);
-                break;
-        }
-    });
-
-};
+//window.onload=function(){
+//	localStorage.setItem("token",headers.Authorization);
+//  $("#other span").click(function(){
+//      $("#sure button").removeAttr("disabled");
+//      $("#submitSure .BTN  button").removeAttr("disabled");
+//      switch($(this).siblings("p").html()){
+//          case "客户类型":
+//              openButton();
+//              NativeCall(this,Bridge,"selectGenre",genre);
+//              break;
+//          case "职业":
+//              openButton();
+//              if(obj.supplementary){
+//                  if(obj.supplementary=="1"){
+//                      pushOccupation($(this),$(".genre").text(),backstage);
+//                  }
+//              }
+//          	console.log(backstage);
+//              NativeCall(this,Bridge,"selectOccupation",occupation);
+//              break;
+//          case "级别":
+//              openButton();
+//              if(obj.supplementary){
+//                  if(obj.supplementary=="1"){
+//                      pushOccupation($(this),$(".occupation").text(),backstage);
+//                  }
+//              }
+//              NativeCall(this,Bridge,"selectLevel",level);
+//              break;
+//      }
+//  });
+//
+//};
 
 //获取数据处理函数
 function HEADER(response){

@@ -84,6 +84,8 @@ body{
 }
 #guarantee ul li div input{
 	border:none;
+	font-size: 1.4rem;
+	text-align: right;
 	height: 2.5rem;
 }
 #guarantee .close button{
@@ -123,4 +125,37 @@ body{
     font-size:1.4rem;
     padding:0.5rem 0;
     border-radius: 0.5rem;
+}
+.error::-webkit-input-placeholder { /* WebKit browsers */
+    color: #ef6762;
+    font-size: 1.4rem;
+}
+.error:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+    color: #ef6762;
+    font-size: 1.4rem;
+}
+.error::-moz-placeholder { /* Mozilla Firefox 19+ */
+    color: #ef6762;
+    font-size: 1.4rem;
+}
+.error:-ms-input-placeholder { /* Internet Explorer 10+ */
+    color: #ef6762;
+    font-size: 1.4rem;
+}
+
+::-webkit-input-placeholder { /* WebKit browsers */
+    color: #B2B2B2;
+    font-size: 1.4rem;
+}
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+    color: #B2B2B2;
+    font-size: 1.4rem;
+}
+::-moz-placeholder { /* Mozilla Firefox 19+ */
+    color: #B2B2B2;
+    font-size: 1.4rem;
+}
+:-ms-input-placeholder { /* Internet Explorer 10+ */
+    color: #B2B2B2;
+    font-size: 1.4rem;
 }

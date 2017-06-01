@@ -23,18 +23,6 @@ function GetQueryString(name) {
     if (r!=null) return (r[2]); return null;
 }
 
-//判断span是否有值
-function verifyChose(ele){
-    var html=$(ele).html();
-    if(html=="请选择"||html=="不能为空"){
-        $(ele).html("不能为空");
-        $(ele).css("color","#ef6762");
-    }else{
-        $(ele).html(html);
-        $(ele).css("color","666666");
-    }
-}
-
 //弹框函数
 function handlePopup(ele) {
     $("#layer").fadeIn(1000);

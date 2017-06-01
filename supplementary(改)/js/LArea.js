@@ -4,6 +4,7 @@ window.LArea = (function() {
         this.data;
         this.index = 0;
         this.value = [0, 0, 0];
+        this.allData;
     }
     MobileArea.prototype = {
         init: function(params) {
@@ -23,6 +24,7 @@ window.LArea = (function() {
                     throw new Error('错误提示: 没有这种数据源类型');
                     break;
             }
+            this.allData=params.data;
             this.idx = params.idx;
             this.combine = params.combine;
             this.bindEvent(this.idx);
@@ -51,6 +53,27 @@ window.LArea = (function() {
             var _self = this;
             //呼出插件
             function popupArea(e) {
+            	if(this.parentElement.previousElementSibling.innerHTML=="客户类型"){
+            		 sure.children[0].removeAttribute("disabled");
+            		 sure.children[0].style.backgroundColor="#d3d3d3";
+                	 document.getElementsByClassName("occuPation")[0].style.display="block";
+            	}
+            	if(this.parentElement.previousElementSibling.innerHTML=="职业"){
+            		var value=this.parentElement.parentElement.previousElementSibling.children[1].children[0].innerHTML;
+            		var saveData=_self.chose(this,value,_self.allData);
+            		if(saveData!=undefined){
+            			_self.data=saveData;
+            		}	
+            		document.getElementsByClassName("leveL")[0].style.display="bolck";
+            		document.getElementsByClassName("leveL")[0].setAttribute("class","occuPation liline");
+            	}
+            	if(this.parentElement.previousElementSibling.innerHTML=="级别"){
+            		var value=this.parentElement.parentElement.previousElementSibling.children[1].children[0].innerHTML;
+            		var saveData=_self.chose(this,value,_self.allData);
+            		if(saveData!=undefined){
+            			_self.data=saveData;
+            		}	
+            	}
             	var idx = _self.idx;
             	_self.gearArea = document.createElement("div");
                 _self.gearArea.className = "gearArea";
@@ -320,17 +343,18 @@ window.LArea = (function() {
 	            if(this.valueTo){
 	                this.valueTo.value= sText;
 	            }
-	            _self.chose(_self.trigger,sText,_self.data);
+//	            _self.chose(_self.trigger,sText,_self.data);
             }
             _self.value = [0, 0, 0];
-            _self.close(e);
+            _self.close(e,sText);
         },
         chose:function(trigger,value,data){
         	for(var i=0;i<data.length;i++){
             	if(data[i].name==value){
                 	if(data[i].children){
-                		var occupation=[];
+                		var SaveData=[];
                 		trigger.parentElement.parentElement.nextElementSibling.style.display="block";
+                		trigger.parentElement.parentElement.nextElementSibling.children[1].children[0].innerHTML="请选择";
                     	for(var c=0;c<data[i].children.length;c++){
                         	var obj={};
                         	obj.name=data[i].children[c].name;
@@ -338,37 +362,52 @@ window.LArea = (function() {
                         	if(data[i].children[c].children){
                         		obj.children=data[i].children[c].children;
                         	}
-                        	occupation.push(obj);
+                        	SaveData.push(obj);
                     	}
-                    	var ele="#"+trigger.parentElement.parentElement.nextElementSibling.children[1].children[0].getAttribute("id"); 
-                    	this.init({
-                        		'trigger':ele,//触发选择控件的文本框，同时选择完毕后name属性输出到该位置
-        						'keys': {
-            						'id':"",
-            						'code':"code",
-            						'name':"name",
-        						}, //绑定数据源相关字段 id对应valueTo的value属性输出 name对应trigger的value属性输出
-        						'type': 1, //数据源类型
-        						'data':occupation, //数据源
-        						'idx': 1,
-        						'combine':['area_province']
-                        });
-                        this.className =['area_province']; // 设置class值
-                	}else{
-                		if(trigger.parentElement.parentElement.nextElementSibling){
-                			trigger.parentElement.parentElement.nextElementSibling.style.display="none";
-                    		trigger.parentElement.parentElement.nextElementSibling.children[1].children[0].innerHTML="请选择"; 
-                		}
+	                 	return SaveData;
+ 	             	}
+            	} 
+            	if(data[i].children){
+                	for(var c=0;c<data[i].children.length;c++){
+                    	if(data[i].children[c].name==value){
+                        	if(data[i].children[c].children){
+                     			var SaveData=[];
+                           		for(var l=0;l<data[i].children[c].children.length;l++){
+                                	var obj={};
+                                	obj.name=data[i].children[c].children[l].name;
+                               	 	obj.code=data[i].children[c].children[l].code;
+                                	SaveData.push(obj);
+                            	}
+                           		return SaveData;
+                        	}
+                    	}
                 	}
-            	}      	
+            	}
         	}
         },
-        close: function(e) {
+        verifyShow:function(text){
+        	if(text=="企业主"){
+        		document.getElementsByClassName("occuPation")[0].style.display="none";
+ 	            occupation.innerHTML="请选择";
+ 	            document.getElementsByClassName("leveL")[0].style.display="none";
+ 	            level.innerHTML="请选择";
+        	}else{
+        		document.getElementsByClassName("occuPation")[0].style.display="block";
+        	}
+        	if(text=="标准受薪"){
+        		document.getElementsByClassName("leveL")[0].style.display="none";
+ 	            level.innerHTML="请选择";
+        	}else{
+        		document.getElementsByClassName("leveL")[0].style.display="bolck";
+        	}
+        },
+        close: function(e,sText) {
             e.preventDefault();
             var _self = this;
             var evt = new CustomEvent('input');
             _self.trigger.dispatchEvent(evt);
             document.body.removeChild(_self.gearArea);
+            _self.verifyShow(sText);
             _self.gearArea=null;
         } 
     }

@@ -1,6 +1,6 @@
 /**Created by ex-dongbo on 2017/4/10*/
 var download="http://a.app.qq.com/o/simple.jsp?pkgname=com.dashuf.disp.v2";
-var registerData={"cv":"10"};
+var registerData={"cv":"10","source":"registerHtml"};
 var headers={"content-type":"application/json"};
 var check="false";
 var obj={};

@@ -7,13 +7,42 @@
     var postUrl = '../../v1/dictionary/schools/new';
     var SchoolName,DiplomaCode,DegreeCode;
     var schoolData=[];
-
+	//按揭状态
+var installmentState=[
+    {
+        "name":"按揭中",
+        "code":"01"
+    },
+    {
+        "name":"已还清",
+        "code":"02"
+    },
+    {
+        "name":"全款",
+        "code":"03"
+    }
+];
+//按揭状态
+var installmentState=[
+    {
+        "name":"按揭中",
+        "code":"01"
+    },
+    {
+        "name":"已还清",
+        "code":"02"
+    },
+    {
+        "name":"全款",
+        "code":"03"
+    }
+];
 $(function(){
 	//获取recommendId
     transfersID=GetQueryString("id");
     //获取storage数据
     find();
-    console.log(supplement);
+  
     //获取headers
     var headers={"content-type" : "application/json"}
     headers.Authorization=supplement.token;
@@ -29,8 +58,8 @@ $(function(){
 //点击事件函数
 function clickView(){
 	//学历写入
-    $("#other ul li span").click(function(){
-        switch($(this).siblings("p").html()){
+    $("#other span").click(function(){
+        switch($(this).parent().siblings("p").html()){
             case "学历":
                 openButton();
                 NativeCall(this,Bridge,"selectEducation","");
@@ -53,7 +82,7 @@ function clickView(){
     //确认跳转
     $("#sure button").click(function(){
         if($(this).html()=="确认"){
-            backDATA();
+            getData();
             console.log(JSON.stringify(RecommendationDetail));
             verification(RecommendationDetail,headers);
             //toAjax(RecommendationDetail,headers);
@@ -93,27 +122,29 @@ function find(){
                 NativeCall(this,Bridge,"showProgressHUD","正在提交");
             },
             success:function(data){
-            	console.log("OK");
             	if(data.succeed){
             		console.log("进入");
             		save();
                     localStorage.setItem("Step","1");
                     NativeCall(this,Bridge,"hideProgressHUD","");
                     self.location="supplementary.html?id="+transfersID+"";
+            	}else{
+            		NativeCall(this,Bridge,"hideProgressHUD","");
+            		NativeCall(this,Bridge,"showToast","服务器开小差了，稍后再试吧");
             	}
             },
             error:function(error){
-            	console.log(error);
-                //NativeCall(this,Bridge,"hideProgressHUD","");
+            	NativeCall(this,Bridge,"hideProgressHUD","");
+            	NativeCall(this,Bridge,"showToast","服务器开小差了，稍后再试吧");
             }
         });
     }
 
     //返回数据方法
-    function backDATA(){
+    function getData(){
         RecommendationDetail.schoolRequestItem.educationDiploma=DiplomaCode;
         RecommendationDetail.schoolRequestItem.educationDegree=DegreeCode;
-        RecommendationDetail.schoolRequestItem.graduateDate=checkTime($(".time span").text());
+        RecommendationDetail.schoolRequestItem.graduateDate=checkTime($("#time").html());
         RecommendationDetail.schoolRequestItem.school=SchoolName;
     }
 
@@ -125,10 +156,10 @@ function find(){
     }
   //学历信息保存方法
     function save(){
-        localStorage.setItem("education",$(".education .right").text());
-        localStorage.setItem("degree",$(".degree .right").text());
-        localStorage.setItem("academy",$(".academy .right").text());
-        localStorage.setItem("time",$(".time .right").text());
+        localStorage.setItem("education",$("#education .right").html());
+        localStorage.setItem("degree",$("#degree .right").html());
+        localStorage.setItem("academy",$("#academy .right").html());
+        localStorage.setItem("time",$("#time .right").html());
 
         localStorage.setItem("DiplomaCode",DiplomaCode);
         localStorage.setItem("DegreeCode",DegreeCode);
@@ -153,16 +184,16 @@ function find(){
         if(supplement.Step=="1"){
             //find();
             if(supplement.education){
-                $(".education .right").html(supplement.education+"<i></i>");
+                $("#education").html(supplement.education);
             }
             if(supplement.degree){
-                $(".degree .right").html(supplement.degree+"<i></i>");
+                $("#degree").html(supplement.degree);
             }
             if(supplement.academy){
-                $(".academy .right").html(supplement.academy+"<i></i>");
+                $("#academy").html(supplement.academy);
             }
             if(supplement.time){
-                $(".time .right").html(supplement.time+"<i></i>");
+                $("#time").html(supplement.time);
             }
             if(supplement.DiplomaCode){
                 DiplomaCode=supplement.DiplomaCode;
@@ -175,33 +206,34 @@ function find(){
             }
         }
     }
-  //nactive异步交互
-    function NativeCall(ele, Bridge,funName,data){
-         Bridge.callHandler(funName, data, function(response) {
-             dispose(ele,response);
-         });
-    }
+    
+//nactive异步交互
+function NativeCall(ele, Bridge,funName,data){
+       Bridge.callHandler(funName, data, function(response) {
+           dispose(ele,response);
+       });
+}
 
-    //nactive相应接受操作函数
-    function dispose(ele,data){
-        data=JSON.parse(data);
-        if(data.result=="01") {
-        	$(ele).html(data.name+"<i></i>");
-            $(ele).css("color","#666666");
-        	if($(ele).siblings("p").html()=="学历"){
-                DiplomaCode=data.code;
-        	}
-        	if($(ele).siblings("p").html()=="学位"){
-                DegreeCode=data.code;
-        	}
-            if($(ele).siblings("p").html()=="毕业院校"){
-                schoolSave=data.school.name;
-            	$(ele).html(data.school.name+"<i></i>");
-                $(ele).css("color","#666666");
-                SchoolName=data.school;
-            }
-        }
-    }
+  //nactive相应接受操作函数
+function dispose(ele,data){
+      data=JSON.parse(data);
+      if(data.result=="01") {
+      	$(ele).html(data.name+"<i></i>");
+          $(ele).css("color","#666666");
+      	if($(ele).siblings("p").html()=="学历"){
+              DiplomaCode=data.code;
+      	}
+      	if($(ele).siblings("p").html()=="学位"){
+              DegreeCode=data.code;
+      	}
+          if($(ele).siblings("p").html()=="毕业院校"){
+              schoolSave=data.school.name;
+          	$(ele).html(data.school.name+"<i></i>");
+              $(ele).css("color","#666666");
+              SchoolName=data.school;
+          }
+      }
+  }
     
   //后台ajax获取方法
     function backAjax(URL,DATA,headers){
@@ -222,47 +254,7 @@ function find(){
         return Time;
     }
 
-
-    //学校数据处理
-    function SchooLData(data){
-        if(data.succeed){
-            schoolData=data;
-        }
-        console.log(schoolData);
-    }
-    //验证函数
-    function verification(RecommendationDetail,headers){
-        if($(".education>div .right").text()=="请选择"){
-            $(".education>div .right").html("学历不能为空");
-            $(".education>div .right").css("color","#ef6762");
-            closeButton()
-        }else if($(".degree>div .right").text()=="请选择"){
-            $(".degree>div .right").html("学位不能为空");
-            $(".degree>div .right").css("color","#ef6762");
-            closeButton()
-        }else if($(".academy>div .right").text()=="请选择"){
-            $(".academy>div .right").html("院校不能为空");
-            $(".academy>div .right").css("color","#ef6762");
-            closeButton()
-        }else if($(".time>div .right").text()=="请选择"){
-            $(".time>div .right").html("时间不能为空");
-            $(".time>div .right").css("color","#ef6762");
-            closeButton()
-        }else{
-            openButton();
-            toAjax(RecommendationDetail,headers);
-        }
-    }
-    // 锁按钮函数
-    function closeButton(){
-        $("#sure button").attr("disabled","disabled");
-        $("#sure button").css("background","#d3d3d3");
-    }
-    // 解锁按钮函数
-    function openButton(){
-        $("#sure button").removeAttr("disabled");
-        $("#sure button").css("background","#fec43f");
-    }
+    
     
 
 

@@ -33,7 +33,9 @@ body{
     box-sizing: border-box;
     color:#666666;
     background:#f0f0f0;
-    position: relative;
+    position: fixed;
+    width: 100%;
+    height:100%;
 }
 #information,#other,#supplement,#isCar{
     margin-top:1rem;
@@ -76,6 +78,9 @@ body{
 #isCar{
 	font-size: 1.5rem;
 }
+#isCar ul li{
+	padding:0.2rem 0;
+}
 #isCar ul li img{
     width: 4rem;
     height:2rem;
@@ -98,11 +103,14 @@ body{
 }
 /*提交样式*/
 #sure{
+	/*position: fixed;*/
+	margin-top:5%;
     box-sizing: border-box;
     width:100%;
     bottom:1rem;
     padding:3% 2%;
     text-align: center;
+    z-index: -1;
 }
 #sure button{
     border:0;
@@ -121,7 +129,7 @@ body{
     left:0;
     width:100%;
     height:100%;
-    background:rgba(0,0,0,0.8);
+    background:rgba(0,0,0,0.4);
 }
 /*下次勾选样式*/
 #box-content{
@@ -220,9 +228,8 @@ body{
     width: 10%;
 }
 #content-submit {
-    display: none;
     position: fixed;
-    bottom: 0;
+    bottom: -290px;
     z-index: 10;
 }
 #box-submit {
