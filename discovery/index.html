@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+		<title>发现</title>
+		<style type="text/css">
+			* {
+				padding: 0;
+				margin: 0;
+			}
+			body, html {
+				background-color: #e5e5e5;
+			}
+			header {
+				background-color: #FFFFFF;
+			}
+			li {
+				list-style-type: none;
+			}
+			#img_cover {
+				width: 100%;
+			}
+			#title_cover {
+				position: absolute;
+				width: 100%;
+				top: 20%;
+				left: 50%;
+				-webkit-transform: translateX(-50%);
+				transform: translateX(-50%);
+			}
+			#tab_theme {
+				width: 100%;
+				height: 4.375rem;
+			}
+			.tab {
+			    width: 25%;
+			    display: inline-block;
+				float: left;
+				text-align: center;
+				vertical-align: middle;
+				padding: 10px 0;
+			}
+			.tab_img {
+				width: 1.5625rem;
+				height: 1.5625rem;
+				display: inline-block;
+				background-size: 100% 100% !important;
+			}
+			#img_class {
+				background: url(img/icon_class.png);
+			}
+			#img_info {
+				background: url(img/icon_info.png);
+			}
+			#img_communicate {
+				background: url(img/icon_communicate.png);
+			}
+			#img_hot {
+				background: url(img/icon_hot.png);
+			}
+			.tab_name {
+				text-align: center;
+			}
+			.tab_span {
+				color: #666666;
+				font-size: 0.75rem;
+				display: inline-block;
+			}
+			.part {
+				background-color: #FFFFFF;
+				position: relative;
+				margin-top: 10px;
+			}
+			.left-tip {
+				display: inline-block;
+			    padding-left: 0.1875rem;
+			    border-left: 0.25rem solid #febe21;
+			    font-size: 0.9375rem;
+			    height: 0.9375rem;
+			    line-height: 0.9375rem;
+			    font-weight: normal;
+			    margin-left: 0.625rem;
+			}
+			.for-more {
+				float: right;
+				font-size: 14px;
+				padding-top: 0px;
+				padding-right: 0.625rem;
+			}
+			.for-more span {
+				color: #666666;
+				font-size: 0.875rem;
+			}
+			.arrow {
+				background: url(img/arrow.svg);
+				background-size: 100% 100%;
+				height: 10px;
+				width: 17px;
+			    display: inline-block;
+			}
+			#video-content {
+				/*width: 100%;*/
+				text-align: center;
+				padding: 0.625rem;
+			}
+			.video {
+				background-color: #FFFFFF;
+				float: left;
+				width: 50%;
+				margin-top: 5px;
+			}
+			.video img {
+			    width: 95%;
+			}
+			.clear {
+				clear: both;
+				height: 10px;
+			}
+			.li_title {
+				color: #666666;
+				font-size: 0.9375rem;
+			}
+			
+			.li_date {
+				color: #b2b2b2;
+				font-size: 0.75rem;
+			}
+			
+			.li_summary {
+				color: #666666;
+				font-size: 0.9375rem;
+			}
+			.img_cover {
+				position: absolute;
+				display: table-cell;
+				right: 0;
+				top: 50%;
+				-webkit-transform: translateY(-50%);
+				transform: translateY(-50%);
+				vertical-align: middle;
+				background-position: 50%;
+				background-size: cover;
+				background-image: url(img/test.png);
+				width: 28%;
+				height: 4.875rem;
+			}
+			.li-info {
+				position: relative;
+			    list-style: none;
+			    width: 100%;
+			    height: 112px;
+			    display: table;
+			    border-bottom: #eaeaea solid 1px;
+			}
+			.content-info {
+				width: 70%;
+			    display: table-cell;
+			    vertical-align: middle;
+			}
+			.li-communicate {
+				position: relative;
+				border-bottom: #eaeaea solid 1px;
+			}
+			.new {
+				display: inline-block;
+				background: url(img/new.png);
+			    background-size: 100% 100%;
+			    vertical-align: middle;
+				width: 20px;
+				height: 20px;
+			}
+			.communicate-title {
+				display: inline;
+				color: #666666;
+				font-size: 0.9375rem;
+			}
+			.communicate-summary {
+				font-size: 0.9375rem;
+				color: #666666;
+			    margin-top: 5px;
+			}
+			.communicate-data {
+				position: absolute;
+				right: 0px;
+				bottom: 2px;
+			}
+			.icon-eye {
+				display: inline-block;
+				background: url(img/eye.png);
+				background-size: 100% 100%;
+				width: 12px;
+				height: 12px;
+			}
+			.icon-comment {
+				display: inline-block;
+				background: url(img/comment.png);
+				background-size: 100% 100%;
+				width: 12px;
+				height: 12px;
+			}
+			.data-read {
+				font-size: 12px;
+				color: #D9D9D9;
+			}
+			.data-comment {
+				font-size: 12px;
+				color: #D9D9D9;
+			}
+			.part-head {
+				padding: 0.625rem 0;
+			    border-bottom: 1px solid #f0f0f0;
+			}
+			#ul-info {
+				padding: 0 0.625rem;
+			}
+			#ul-communicate {
+				padding: 0.625rem;
+			}
+			#hot-content {
+				padding: 0.625rem;
+			}
+		</style>
+	</head>
+	<body>
+		<header>
+			<div id="img_content">
+				<img id="img_cover" src="img/cover.png"  />
+			</div>
+			<ul id="tab_theme">
+				<li class="tab" id="dashenketang">
+					<div class="tab_img" id="img_class"></div>
+					<div class="tab_name" id="">
+						<span class="tab_span">大神课堂</span>
+					</div>
+				</li>
+				<li class="tab" id="dashenketang">
+					<div class="tab_img" id="img_info"></div>
+					<div class="tab_name" id="">
+						<span class="tab_span">热点资讯</span>
+					</div>
+				</li>
+				<li class="tab" id="dashenketang">
+					<div class="tab_img" id="img_communicate"></div>
+					<div class="tab_name" id="">
+						<span class="tab_span">产品交流</span>
+					</div>
+				</li>
+				<li class="tab" id="dashenketang">
+					<div class="tab_img" id="img_hot"></div>
+					<div class="tab_name" id="">
+						<span class="tab_span">热门活动</span>
+					</div>
+				</li>
+			</ul>
+		</header>
+		
+		<section class="part" id="part-dashenketang">
+			<div class="part-head">
+				<div class="left-tip">大神课堂</div>
+				<div class="for-more">
+					<span id="">全部</span>
+					<div class="arrow"></div>
+				</div>
+			</div>
+			<div>
+				<ul id="video-content">
+					<li class="video">
+						<img src="img/test.png" />
+					</li>
+					<li class="video">
+						<img src="img/test.png" />
+					</li>
+					<li class="video">
+						<img src="img/test.png" />
+					</li>
+					<li class="video">
+						<img src="img/test.png" />
+					</li>
+				</ul>
+			</div>
+			<div class="clear"></div>
+		</section>
+		
+		<section class="part" id="part-redianzixun">
+			<div class="part-head">
+				<div class="left-tip">热点资讯</div>
+				<div class="for-more">
+					<span id="">全部</span>
+					<div class="arrow"></div>
+				</div>
+			</div>
+			<ul id="ul-info">
+				<li class="li-info">
+					<section class="content-info">
+						<p class="li_title">马云：新金融的第一步就是打造信用…
+							<p>
+								<p class="li_date">2017-04-23</p>
+								<p class="li_summary">我觉得做CEO主要是两件事，一是看未来的机会，二是看未来的灾难。</p>
+					</section>
+					<div class="img_cover"></div>
+				</li>
+				<li class="li-info">
+					<section class="content-info">
+						<p class="li_title">马云：新金融的第一步就是打造信用…
+							<p>
+								<p class="li_date">2017-04-23</p>
+								<p class="li_summary">我觉得做CEO主要是两件事，一是看未来的机会，二是看未来的灾难。</p>
+					</section>
+					<div class="img_cover"></div>
+				</li>
+			</ul>
+		</section>
+		<section class="part" id="part-communicate">
+			<div class="part-head">
+				<div class="left-tip">产品交流</div>
+				<div class="for-more">
+					<span id="">全部</span>
+					<div class="arrow"></div>
+				</div>
+			</div>
+			<ul id="ul-communicate">
+				<li class="li-communicate">
+					<div class="communicate-title">
+						<div class="new"></div>
+						<span>大数时贷、小数云贷不接受的贷款申请人是哪些？</span>
+					</div>
+					<div class="communicate-summary">
+						不接受申请人的信用记录情况：贷款、贷记卡、准贷记卡当前状态为呆账（指已过偿付期限，经催讨尚不能收回，
+					</div>
+					<div class="communicate-data">
+						<div class="icon-eye"></div>
+						<span class="data-read">0</span>
+						<div class="icon-comment"></div>
+						<span class="data-comment">1</span>
+					</div>
+					<div class="clear"></div>
+				</li>
+				<li class="li-communicate">
+					<div class="communicate-title">
+						<div class="new"></div>
+						<span>大数时贷、小数云贷不接受的贷款申请人是哪些？</span>
+					</div>
+					<div class="communicate-summary">
+						不接受申请人的信用记录情况：贷款、贷记卡、准贷记卡当前状态为呆账（指已过偿付期限，经催讨尚不能收回，
+					</div>
+					<div class="communicate-data">
+						<div class="icon-eye"></div>
+						<span class="data-read">0</span>
+						<div class="icon-comment"></div>
+						<span class="data-comment">1</span>
+					</div>
+					<div class="clear"></div>
+				</li>
+			</ul>
+		</section>
+		
+		<section class="part" id="part-hot">
+			<div class="part-head">
+				<div class="left-tip">热门活动</div>
+				<div class="for-more">
+					<span id="">全部</span>
+					<div class="arrow"></div>
+				</div>
+			</div>
+			<div>
+				<ul id="hot-content">
+					<li class="video">
+						<img src="img/test.png" />
+					</li>
+					<li class="video">
+						<img src="img/test.png" />
+					</li>
+				</ul>
+			</div>
+			<div class="clear"></div>
+		</section>
+	</body>
+</html>

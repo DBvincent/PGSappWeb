@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+		<title></title>
+		<style type="text/css">
+			* {
+				margin: 0;
+				padding: 0;
+			}
+			html, body {
+				width: 100%;
+				height: 100%;
+				overflow-x: hidden;
+			}
+			#content {
+				margin: 0 20px;
+			}
+			#info-title {
+				text-align: left;
+				margin-top: 1em;
+				margin-bottom: 1em;
+				font-size: 1.125rem;
+				color: #666666;
+			}
+			#info-date {
+				color: #b2b2b2;
+				font-size: 0.9375rem;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="content">
+			<div id="infoData"></div>
+		</div>
+		<script src="js/jquery-1.11.3.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/common.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			$(function() {
+				var id = getQueryString("id");
+				console.log(id);
+				getDetailInfoData(id);
+			});
+			
+			function getDetailInfoData(id) {
+				var url = "../api/info/findInfoById";
+				//var headers={
+				  //  "Authorization": "Bearer UEBmSHdvY2dueExjRDg1bndKNFZUNGNY"
+				//};
+				$.ajax({
+					type: "POST",
+					url: url,
+					headers: headers,
+					dataType : 'json',
+		            data : {
+		                id: id
+		            },
+		            success : function(resp) {
+		            	var data = resp.data;
+		            	console.log(data);
+		            	var title = data.title;
+		            	var content = data.content;
+		            	var sDate = data.effectDate;
+		            	// var summary = data.summary;
+		            	var bodyStr = "<h3 id='info-title'>"+title+"</h3>";
+		            	bodyStr += "<span id='info-date'>" + sDate + "</span>"
+		            	if("1" == data.showCover){
+							bodyStr += "<img src=\""+info.coverImgUrl+"\" style=\"width:100%;\">";
+						}
+		            	bodyStr += "<div style=\"width:100%;text-align:left;\">" + content + "</div>";
+		            	$("#infoData").append(bodyStr);
+		            },
+		            error: function(resp) {
+		            	
+		            }
+				});
+			}
+			
+			// 获取参数
+			function getQueryString(name) {
+			    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+			    var r = window.location.search.substr(1).match(reg);
+			    if (r != null) return unescape(r[2]); return null;
+		    }
+		</script>
+	</body>
+</html>

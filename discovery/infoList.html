@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+		<title>热点资讯</title>
+		<style type="text/css">
+			* {
+				padding: 0;
+				margin: 0;
+			}
+			
+			ul {
+				margin: 0 8px;
+			}
+			
+			li {
+				position: relative;
+				list-style: none;
+				width: 100%;
+				height: 112px;
+				display: table;
+				border-bottom: #eaeaea solid 1px;
+			}
+			
+			section {
+				width: 70%;
+				display: table-cell;
+				vertical-align: middle;
+			}
+			
+			.img_cover {
+				position: absolute;
+				display: table-cell;
+				right: 0;
+				top: 50%;
+				-webkit-transform: translateY(-50%);
+				transform: translateY(-50%);
+				vertical-align: middle;
+				background-position: 50%;
+				background-size: cover;
+				width: 30%;
+				height: 86px;
+			}
+			
+			.li_title {
+				color: #666666;
+				font-size: 0.9375rem;
+			}
+			
+			.li_date {
+				color: #b2b2b2;
+				font-size: 0.75rem;
+			}
+			
+			.li_summary {
+				color: #666666;
+				font-size: 0.9375rem;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div id="newScroll">
+			<div id="inScroll">
+				<div id="content">
+					<div id="info">
+						<!--<div id="pullDown" style="text-align: center; display:none;"><span class="pullDownIcon"></span><span class="pullDownLabel pullDownLabelloading">向下拉进行刷新...</span></div>-->
+						<ul id="ul_info"></ul>
+						<div id="pullUp" style="text-align: center; display: none;"><span class="pullUpIcon"></span><span class="pullUpLabel pullUpLabelloading">向上拉加载更多...</span></div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script src="js/iscroll-min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/jquery-1.11.3.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/common.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			var page = 1,
+				pageSize = 10;
+			var count;
+			var mScroll = "";
+			var isPullUp = false;
+			var isLoading = false;
+			var pullDownEl, pullUpEl, pullDownOffset, pullUpOffset;
+			$(function() {
+				getInfoListData(false);
+			});
+
+			function initNewIScroll() {
+				if(mScroll instanceof iScroll){
+		            mScroll.destroy();
+		        }
+//				pullDownEl = document.getElementById('pullDown');
+//				pullDownOffset = pullDownEl.offsetHeight;
+				pullUpEl = document.getElementById('pullUp');
+				pullUpOffset = pullUpEl.offsetHeight;
+				
+				if(mScroll instanceof iScroll) {
+					mScroll.destroy();
+				}
+				$("#newScroll").height($(window).height());
+
+				mScroll = new iScroll("newScroll", {
+					hScrollbar: false,
+					vScrollbar: false,
+//					topOffset: pullDownOffset,
+					onRefresh: function() {
+						/*if (pullDownEl.className.match('loading')) {
+							pullDownEl.className = '';
+							pullDownEl.querySelector('.pullDownLabel').innerHTML = '向下拉进行刷新...';
+						}else*/ if (pullUpEl.className.match('loading')) {
+							pullUpEl.className = '';
+							pullUpEl.querySelector('.pullUpLabel').innerHTML = '上拉加载更多...';
+						}
+					},
+					onScrollMove: function() {
+						/*if (this.y > 5 && !pullDownEl.className.match('flip')) {
+							pullDownEl.className = 'flip';
+							pullDownEl.querySelector('.pullDownLabel').innerHTML = '';
+							this.minScrollY = 0;
+						} else if (this.y < 5 && pullDownEl.className.match('flip')) {
+							pullDownEl.className = '';
+							pullDownEl.querySelector('.pullDownLabel').innerHTML = '向下拉进行刷新...';
+							this.minScrollY = -pullDownOffset;
+						} else */if (this.y < (this.maxScrollY - 5) && !pullUpEl.className.match('flip')) {
+							 pullUpEl.className = 'flip';
+							 pullUpEl.querySelector('.pullUpLabel').innerHTML = '松手开始更新...';
+							 this.maxScrollY = this.maxScrollY;
+						 } else if (this.y > (this.maxScrollY + 5) && pullUpEl.className.match('flip')) {
+							 pullUpEl.className = '';
+							 pullUpEl.querySelector('.pullUpLabel').innerHTML = '上拉加载更多...';
+							 this.maxScrollY = pullUpOffset;
+						 }
+					},
+					onScrollEnd: function() {
+						/*if (pullDownEl.className.match('flip')) {
+							pullDownEl.className = 'loading';
+							$('#pullDown').css('display', 'block');
+							pullDownEl.querySelector('.pullDownLabel').innerHTML = '加载中...';				
+							window.setTimeout(pullDownAction, 500);
+						} else*/ if (pullUpEl.className.match('flip')) {
+							$('#pullUp').show();
+							pullUpEl.className = 'loading';
+							pullUpEl.querySelector('.pullUpLabel').innerHTML = '加载中...'; 
+						 	window.setTimeout(pullUpAction, 500);
+						} 
+					}
+				});
+			}
+			
+			function pullDownAction () {
+				// 刷新清空
+				page = 1;
+				getInfoListData(false);
+			}
+			function pullUpAction () {
+				page ++;
+				getInfoListData(true);
+				$('#pullUp').hide();
+				mScroll.refresh();		// 数据加载完成后，调用界面更新方法 Remember to refresh when contents are loaded (ie: on ajax completion)
+			}
+			
+			function loadMore() {
+				var allPageCount = Math.ceil(count / pageSize);
+				if(page < allPageCount) {
+					page ++;
+					getInfoListData(true);
+				} else {
+					$("#pullUp").remove();
+					mScroll.refresh();
+				}
+			}
+			
+			function getInfoListData(isMore) {
+				var url = '../api/info/findList';
+				//var headers={
+				  //  "Authorization": "Bearer UEBmSHdvY2dueExjRDg1bndKNFZUNGNY"
+				//};
+				$.ajax({
+					url : url,
+		            type : 'POST',
+		            dataType : 'json',
+		            headers: headers,
+		            data : {
+		                pageNum: page,
+						pageSize: pageSize
+		            },
+		            success : function(resp) {
+		            	console.log(resp);
+		            	count = resp.data.count;
+		                var data = resp.data.list;
+		                if(data.length == 0 || data == '' || (!data)) {
+		                	if(isMore) {
+		                		// 没有数据的情况
+		                	} else {
+		                		$('.pullUpLabel').text('没有更多内容了');
+		                		return;
+		                	}
+		                } else {
+		                	var liHTML = "";
+							for(var i = 0; i < data.length; i++) {
+								var coverImgUrl = data[i].coverImgUrl;
+								liHTML += '<li infoid="' + data[i].id + '"><section><p class="li_title">' + data[i].title + '</p><p class="li_date">' + data[i].effectDate + '</p><p class="li_summary">' + data[i].summary + '</p></section><div class="img_cover" style="background-image:url(\'' + coverImgUrl + '\')"></div></li>';
+							}
+							if(! isMore) {
+								$("#ul_info").html(liHTML);
+							} else {
+								$("#ul_info").append(liHTML);
+							}
+		                }
+//		                if(page == 1){
+//							setTimeout(function(){initNewIScroll();},500);
+//						}else {
+//							mScroll.refresh();
+//						}
+//		                if(page == 1 && count <= pageSize) {
+//		                	//$("#pullUp").remove();
+//		                }
+//		                if(data.length == 0 && page != 1) {
+//		                	$(".pullUpLabel").html("没有更多文章了哦");
+//		                	setTimeout(function(){$("#pullUp").remove();},1000);
+//		                }
+						// 分公司
+						$("#ul_info li").click(function() {
+							var id = $(this).attr("infoid");
+							window.location.href = 'infoDetail.html?id=' + id;
+						});
+		            },
+		            error : function(resp) {
+						console.log(resp);		
+		            }
+				});
+			}
+			
+			//初始化绑定iScroll控件 
+			document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
+			
+			document.addEventListener('DOMContentLoaded', function () { setTimeout(initNewIScroll, 200); }, false);
+
+		</script>
+	</body>
+
+</html>
